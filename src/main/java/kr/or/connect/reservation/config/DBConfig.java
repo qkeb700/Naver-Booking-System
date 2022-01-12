@@ -24,10 +24,10 @@ public class DBConfig implements TransactionManagementConfigurer {
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(driverClassName);
-		dataSource.setUrl(url);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/mydb?useUnicode=true&characterEncoding=utf8");
+		dataSource.setUsername("root");
+		dataSource.setPassword("sksdi1532");
 		return dataSource;
 	}
 
