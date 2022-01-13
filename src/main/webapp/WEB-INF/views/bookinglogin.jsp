@@ -25,7 +25,7 @@
       <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
       <meta name="format-detection" content="telephone=no, address=no, email=no">
       <title translate="CM-NBOOKING">네이버 예약</title>
-      <link rel="stylesheet" href="./css/bookinglogin.css">
+      <link rel="stylesheet" href="./resources/css/bookinglogin.css">
    </head>
    <body class="biz  ko" >
       
@@ -41,7 +41,7 @@
                   <h1 class="login_header"> <a href="./mainpage.html"  class="nbooking_logo spr_bi txt_logo" > <span translate="CM-NBOOKING">네이버 예약</span> </a> </h1>
                   <!---->
                   <div >
-                     <form name="confirm_form" class="ng-pristine ng-valid" id="form1" action="./myreservation.html">
+                     <form name="confirm_form" class="ng-pristine ng-valid" id="form1" action="bookingLoginOk">
                         <h2 class="login_header_sub border_bottom"> <span translate="CM-NON_MEMBER_BK_CONFIRMATION">비회원 예약확인</span> </h2>
                         <div class="login_form"> 
                            <label class="label_form" for="resrv_id" translate="CM-BOOKING_NUMBER">예약자 이메일 입력</label> 

@@ -20,7 +20,5 @@ public class NaverBookingApiController {
 	@GetMapping("/categories")
 	public List<Category> getCategories() {
 		return categoryService.getCategories();
-		
-		
 	}
 }
