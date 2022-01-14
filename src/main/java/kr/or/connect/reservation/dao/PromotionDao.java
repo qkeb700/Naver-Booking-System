@@ -23,9 +23,7 @@ public class PromotionDao {
 	}
 	
 	public List<Promotion> selectAll(){
-		Map<String, String> params = new HashMap<>();
-		params.put("imageType", null);
-		return jdbc.query(PromotionDaoSql.SELECT_ALL, params, rowMapper);
+		return jdbc.query(PromotionDaoSql.SELECT_ALL, rowMapper);
 		
 	}
 }

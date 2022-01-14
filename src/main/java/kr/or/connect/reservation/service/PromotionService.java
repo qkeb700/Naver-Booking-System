@@ -1,5 +1,9 @@
 package kr.or.connect.reservation.service;
 
-public interface PromotionService {
+import java.util.List;
 
+import kr.or.connect.reservation.dto.Promotion;
+
+public interface PromotionService {
+	public List<Promotion> getPromotions();
 }
