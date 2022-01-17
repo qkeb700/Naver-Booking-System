@@ -11,6 +11,13 @@ public class Product {
 	private Date createDate;
 	private Date modifyDate;
 	
+	private int displayInfoId;
+	private int productId;
+	private String productDescrption;
+	private String placeName;
+	private String productContent;
+	private String productImageUrl;
+	
 	public int getId() {
 		return id;
 	}

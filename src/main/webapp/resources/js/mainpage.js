@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
-	
+	ajaxImage();
+	imgSlider();
 })
 
 function ajaxImage(){
@@ -13,10 +14,29 @@ function ajaxImage(){
 		promotionsFromJson = JSON.parse(oReq.responseText); 
 		
 		for(let key in promotionsFromJson) {
-			input = promotionItem.replace("{}")
-		}	
+			input = promotionItem.replace("{productImageUrl}", promotionsFromJson[key].productImageUrl)
+								 .replace("{description}", promotionsFromJson[key].description)
+								 .replace("{placeName}", promotionsFromJson[key].placeName);
+			
+			visualImg.innerHTML += input;
+		}
 	});
 	
 	oReq.open("GET", "/reservation/api/promotions");
 	oReq.send();
+}
+
+function imgSlider(){
+	let visualImg = document.querySelector(".visual_img");
+	let totalLength = document.querySelectorAll(".item").length;
+	let index = 1;
+	
+	setInterval(function(){
+		if(index > totalLength){
+			index = 0;
+		}	
+		visualImg.style.transform = "translate(-" + 414*index + "px, 0 )";
+		visualImg.style.transition = "transform 0.4s ease-in-out";
+		index++;
+	}, 2000)
 }
