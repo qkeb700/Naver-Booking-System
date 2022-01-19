@@ -40,3 +40,7 @@ function imgSlider(){
 		index++;
 	}, 2000)
 }
+
+function clickCategory(){
+	let categoryList = document.querySelector(".event_tab_lst");
+}
