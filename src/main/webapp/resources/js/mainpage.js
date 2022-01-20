@@ -52,6 +52,8 @@ function ajaxProducts(start) {
 	let lstEventBox = document.querySelectorAll(".lst_event_box");
 	let totalCount = document.querySelector(".event_lst_txt .pink");
 	let categoryId = document.querySelector(".event_tab_lst .item .anchor.active").parentNode.getAttribute("data-category");
+	let itemListLength = document.querySelectorAll(".lst_event_box .item").length;
+	let moreBtn = document.querySelector(".more .btn");
 	
 	oReq.addEventListener("load", function(){
 		productsFromJson = JSON.parse(oReq.responseText);
@@ -69,10 +71,14 @@ function ajaxProducts(start) {
 				lstEventBox[0].innerHTML += input;				
 			} else {
 				lstEventBox[1].innerHTML += input;
-			}
+			}	
+		}
+		console.log(itemListLength)
+			console.log(productsFromJson.totalCount)
+		if(itemListLength >= productsFromJson.totalCount - 4) {
+			moreBtn.style.display = "none";
 		}
 	});
-	
 	oReq.open("GET", "/reservation/api/products?categoryId=" + categoryId + "&start=" + start);
 	oReq.send();
 }
@@ -80,8 +86,16 @@ function ajaxProducts(start) {
 
 function clickCategory(){
 	let categoryList = document.querySelector(".event_tab_lst");
+	let moreBtn = document.querySelector(".more .btn");
+	
 	categoryList.addEventListener("click", function(evt){
 		let targetElem = document.querySelector(".anchor.active");
+		
+		if(moreBtn.style.display == 'none') {
+			moreBtn.style.display = 'block';
+			//moreBtn.parentNode.style.text_align = "center";
+			location.reload();
+		}
 		if(targetElem){
 			document.querySelector(".anchor.active").classList.remove("active");		
 		}

@@ -94,10 +94,10 @@
                         
                     </ul>
                     <!-- 더보기 -->
-                    <div class="more">
-                        <button class="btn"><span>더보기</span></button>
-                    </div>
                 </div>
+                    <div class="more" style="text-align:center">
+                        <button class="btn" style="background: white; padding: 5px 0;" ><span>더보기</span></button>
+                    </div>
             </div>
         </div>
     </div>
