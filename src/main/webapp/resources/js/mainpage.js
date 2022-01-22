@@ -93,8 +93,6 @@ function clickCategory(){
 		
 		if(moreBtn.style.display == 'none') {
 			moreBtn.style.display = 'block';
-			//moreBtn.parentNode.style.text_align = "center";
-			location.reload();
 		}
 		if(targetElem){
 			document.querySelector(".anchor.active").classList.remove("active");		

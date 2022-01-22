@@ -10,4 +10,9 @@ public class ReservationController {
 	public String myreservation() {
 		return "myreservation";
 	}
+	
+	@GetMapping("reserve")
+	public String reserve() {
+		return "reserve";
+	}
 }

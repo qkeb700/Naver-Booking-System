@@ -10,8 +10,7 @@
     <meta name="description" content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
-    <link href="./resources/css/reservation.css" rel="stylesheet">
-    <link href="./resources/css/bookinglogin.css" rel="stylesheet">
+    <link href="./resources/css/style.css" rel="stylesheet">
     <script src="./resources/js/mainpage.js"></script>
 </head>
 
@@ -21,7 +20,7 @@
             <header class="header_tit">
                 <h1 class="logo">
                     <a href="#" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="#" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                    <a href="reserve" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
                 <c:choose>
                 	<c:when test="${empty inputEmail}">
@@ -94,10 +93,10 @@
                         
                     </ul>
                     <!-- 더보기 -->
-                </div>
-                    <div class="more" style="text-align:center">
-                        <button class="btn" style="background: white; padding: 5px 0;" ><span>더보기</span></button>
+                    <div class="more" >
+                        <button class="btn" ><span>더보기</span></button>
                     </div>
+                </div>
             </div>
         </div>
     </div>
