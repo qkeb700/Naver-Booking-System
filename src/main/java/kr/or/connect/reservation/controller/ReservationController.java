@@ -15,4 +15,9 @@ public class ReservationController {
 	public String reserve() {
 		return "reserve";
 	}
+	
+	@GetMapping("detail")
+	public String detail() {
+		return "detail";
+	}
 }
