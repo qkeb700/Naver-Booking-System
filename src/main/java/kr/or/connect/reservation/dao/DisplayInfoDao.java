@@ -1,5 +1,7 @@
 package kr.or.connect.reservation.dao;
 
+import java.util.Collections;
+
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -16,6 +18,8 @@ public class DisplayInfoDao {
 	
 	public DisplayInfoDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
-		
+	}
+	public DisplayInfo selectById(int displayInfoId) {
+		return jdbc.queryForObject(DisplayInfoDaoSql.SELECT_BY_ID, Collections.singletonMap("displayInfoId", displayInfoId), rowMapper);
 	}
 }
