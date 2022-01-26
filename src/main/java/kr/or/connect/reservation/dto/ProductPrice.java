@@ -3,19 +3,19 @@ package kr.or.connect.reservation.dto;
 import java.util.Date;
 
 public class ProductPrice {
-	private int id;
+	private int productPriceId;
 	private int productId;
 	private String priceTypeName;
 	private int price;
 	private double discountRate;
-	private Date createDate;
-	private Date modifyDate;
+	private String createDate;
+	private String modifyDate;
 	
-	public int getId() {
-		return id;
+	public int getProductPriceId() {
+		return productPriceId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setProductPriceId(int productPriceId) {
+		this.productPriceId = productPriceId;
 	}
 	public int getProductId() {
 		return productId;
@@ -41,24 +41,25 @@ public class ProductPrice {
 	public void setDiscountRate(double discountRate) {
 		this.discountRate = discountRate;
 	}
-	public Date getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
-	public Date getModifyDate() {
+	public String getModifyDate() {
 		return modifyDate;
 	}
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 	@Override
 	public String toString() {
-		return "ProductPrice [id=" + id + ", productId=" + productId + ", priceTypeName=" + priceTypeName + ", price="
-				+ price + ", discountRate=" + discountRate + ", createDate=" + createDate + ", modifyDate=" + modifyDate
-				+ "]";
+		return "ProductPrice [productPriceId=" + productPriceId + ", productId=" + productId + ", priceTypeName="
+				+ priceTypeName + ", price=" + price + ", discountRate=" + discountRate + ", createDate=" + createDate
+				+ ", modifyDate=" + modifyDate + "]";
 	}
+	
 	
 	
 }

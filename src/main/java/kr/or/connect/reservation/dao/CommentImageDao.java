@@ -1,5 +1,6 @@
 package kr.or.connect.reservation.dao;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +23,9 @@ public class CommentImageDao {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 	
-	public List<CommentImage> selectByDisplayInfoIdAndCommentId(int displayInfoId, int commentId) {
-		Map<String, Integer> params = new HashMap<>();
-		params.put("displayInfoId", displayInfoId);
-		params.put("commentId", commentId);
-		return jdbc.query(CommentImageDaoSql.SELECT_BY_DISPLAY_INFO_ID, params, rowMapper);
+	public List<CommentImage> selectByCommentId(int commentId) {
+//		Map<String, Integer> params = new HashMap<>();
+//		params.put("displayInfoId", displayInfoId);
+		return jdbc.query(CommentImageDaoSql.SELECT_BY_DISPLAY_INFO_ID, Collections.singletonMap("commentId", commentId), rowMapper);
 	}
 }
