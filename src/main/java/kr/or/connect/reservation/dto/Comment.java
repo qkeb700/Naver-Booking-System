@@ -89,7 +89,7 @@ public class Comment {
 	}
 
 	public String getReservationDate() {
-		return reservationDate;
+		return reservationDate.substring(0, 10);
 	}
 
 	public void setReservationDate(String reservationDate) {

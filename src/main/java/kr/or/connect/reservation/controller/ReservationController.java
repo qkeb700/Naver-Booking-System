@@ -6,18 +6,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ReservationController {
 
-	@GetMapping("myreservation")
+	@GetMapping("/myreservation")
 	public String myreservation() {
 		return "myreservation";
 	}
 	
-	@GetMapping("reserve")
+	@GetMapping("/reserve")
 	public String reserve() {
 		return "reserve";
 	}
 	
-	@GetMapping("detail")
+	@GetMapping("/detail")
 	public String detail() {
 		return "detail";
+	}
+	
+	@GetMapping("/review")
+	public String review() {
+		return "review";
 	}
 }
