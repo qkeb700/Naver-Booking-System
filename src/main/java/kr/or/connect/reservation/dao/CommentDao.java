@@ -26,7 +26,7 @@ public class CommentDao {
 	}
 	
 	public double selectAvgScoreByDisplayInfoId(int displayInfoId) {
-		double avgScore = 0;;
+		double avgScore = 0;
 		try {
 			avgScore = jdbc.queryForObject(CommentDaoSql.SELECT_AVG_SCORE_BY_DISPLAY_INFO_ID, Collections.singletonMap("displayInfoId", displayInfoId), Double.class);			
 		}catch(NullPointerException e) {

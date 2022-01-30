@@ -14,8 +14,8 @@
             height: 414px;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./resources/js/detail.js"></script>
 </head>
 
@@ -236,14 +236,16 @@
 </body>
 
 <script type="myTemplate" id="productImages">
-	<li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="resources/{{productImageUrl}}"> <span class="img_bg"></span>
+	{{#each productImageUrl}}
+	<li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="resources/{{this.saveFileName}}"> <span class="img_bg"></span>
         <div class="visual_txt">
             <div class="visual_txt_inn">
-                <h2 class="visual_txt_tit"> <span>{{productDescription}}</span> </h2>
-                <p class="visual_txt_dsc">{{productContent}}</p>
+                <h2 class="visual_txt_tit"> <span>{{../productDescription}}</span> </h2>
+                <p class="visual_txt_dsc"></p>
             </div>
         </div>
     </li>
+	{{/each}}
 </script>
 
 </html>
