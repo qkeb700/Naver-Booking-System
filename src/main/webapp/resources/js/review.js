@@ -18,7 +18,6 @@ function ajaxProductByDisplayId() {
 		let totalAvg = document.querySelector(".grade_area .text_value span");
 		totalAvg.innerHTML = displayJson.averageScore.toFixed(1);
 		starRate = (displayJson.averageScore.toFixed(1) / 5.0) * 100;
-		console.log(starRate);
 		let graphValue = document.querySelector(".graph_value");
 		graphValue.style.width = starRate + "%";
 		// 한줄평 건수
@@ -34,7 +33,6 @@ function ajaxProductByDisplayId() {
 		// 한줄평 핸들바 이용해서 가져오기	
 		let listReviews = document.querySelector(".list_short_review");
 		let commentsTemplate = document.querySelector("#comments").innerHTML;
-		console.log(comments);
 		let bindTemplate2 = Handlebars.compile(commentsTemplate);
 		let data2 = {
 			"displayInfo" : displayJson.displayInfo,
@@ -52,9 +50,6 @@ function ajaxProductByDisplayId() {
 		});
 		
 		listReviews.innerHTML = bindTemplate2(data2);
-		
-		
-		
 		
 	});
 	

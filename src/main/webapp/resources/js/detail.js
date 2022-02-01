@@ -103,7 +103,6 @@ function ajaxProductByDisplayId() {
 		// 한줄평 핸들바 이용해서 가져오기	
 		let listReviews = document.querySelector(".list_short_review");
 		let commentsTemplate = document.querySelector("#comments").innerHTML;
-		console.log(comments);
 		let bindTemplate2 = Handlebars.compile(commentsTemplate);
 		let data2 = {
 			"displayInfo" : displayJson.displayInfo,
