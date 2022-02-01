@@ -18,8 +18,9 @@ function ajaxProductByDisplayId() {
 		let totalAvg = document.querySelector(".grade_area .text_value span");
 		totalAvg.innerHTML = displayJson.averageScore.toFixed(1);
 		starRate = (displayJson.averageScore.toFixed(1) / 5.0) * 100;
+		console.log(starRate);
 		let graphValue = document.querySelector(".graph_value");
-		graphValue.style.width = starRate;
+		graphValue.style.width = starRate + "%";
 		// 한줄평 건수
 		let totalComments;
 		if(displayJson.comments == null) {
@@ -40,7 +41,7 @@ function ajaxProductByDisplayId() {
 			"comments" : displayJson.comments
 		}
 		Handlebars.registerHelper("saveFileName", function(item){
-			return item.commentImages.shift().saveFileName;
+			return item.shift().saveFileName;
 		});
 		Handlebars.registerHelper("email", function(input){
 			return input.substring(0,4) + "****";

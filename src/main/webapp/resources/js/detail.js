@@ -89,7 +89,7 @@ function ajaxProductByDisplayId() {
 		totalAvg.innerHTML = displayJson.averageScore.toFixed(1);
 		starRate = (displayJson.averageScore.toFixed(1) / 5.0) * 100;
 		let graphValue = document.querySelector(".graph_value");
-		graphValue.style.width = starRate;
+		graphValue.style.width = starRate + "%";
 		// 한줄평 건수
 		let totalComments;
 		if(displayJson.comments == null) {
@@ -110,7 +110,7 @@ function ajaxProductByDisplayId() {
 			"comments" : displayJson.comments.slice(0,3)
 		}
 		Handlebars.registerHelper("saveFileName", function(item){
-			return item.commentImages.saveFileName;
+			return item.commentImages.shift().saveFileName;
 		});
 		Handlebars.registerHelper("email", function(input){
 			return input.substring(0,4) + "****";
@@ -123,7 +123,30 @@ function ajaxProductByDisplayId() {
 		listReviews.innerHTML = bindTemplate2(data2);
 		
 		
-		
+		// 탭에서 누르면 상세정보와 오시는길 표시
+		let tabDetail = document.querySelector("._detail a");
+		let tabPath = document.querySelector("._path a");
+		// 전시 상품 소개글
+		$(".detail_info_lst .in_dsc").html(displayJson.displayInfo.productContent);
+		// 오시는길 정보 입력
+		$('.store_name').html(displayJson.displayInfo.productDescription);
+		$('.store_addr_bold').html(displayJson.displayInfo.placeStreet);
+		$('.addr_old_detail').html(displayJson.displayInfo.placeLot);
+		$('.addr_detail').html(displayJson.displayInfo.placeName);
+		$('.store_tel').html(displayJson.displayInfo.telephone);
+		tabDetail.addEventListener("click", function() {
+			$('._detail a').addClass('active');
+			$('._path a').removeClass('active');
+			$('.detail_location').addClass('hide');
+			$(".detail_area_wrap").removeClass('hide');
+			
+		});
+		tabPath.addEventListener("click", function() {
+			$('._path a').addClass('active');
+			$('._detail a').removeClass('active');
+			$(".detail_area_wrap").addClass('hide');
+			$('.detail_location').removeClass('hide');
+		});
 		
 	});
 	

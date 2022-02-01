@@ -69,7 +69,7 @@
 			{{#if this.commentImages}}
 			<div class="review_area">
 				<div class="thumb_area">
-					<a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="resources/{{saveFileName this}}" alt="리뷰이미지"> </a> <span class="img_count" style="display:none;">1</span>                                               
+					<a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="resources/{{saveFileName this.commentImages}}" alt="리뷰이미지"> </a> <span class="img_count" style="display:none;">1</span>                                               
 				</div>
 				<h4 class="resoc_name">{{../displayInfo/productDescription}}</h4>
 				<p class="review">{{this.comment}}</p>
