@@ -15,11 +15,7 @@ function ajaxProductByDisplayId() {
 		displayJson = JSON.parse(oReq.responseText);
 		
 		// 예매자 한줄평 평점, 별점 적용
-		let totalAvg = document.querySelector(".grade_area .text_value span");
-		totalAvg.innerHTML = displayJson.averageScore.toFixed(1);
-		starRate = (displayJson.averageScore.toFixed(1) / 5.0) * 100;
-		let graphValue = document.querySelector(".graph_value");
-		graphValue.style.width = starRate + "%";
+		commentsRate(displayJson);
 		// 한줄평 건수
 		let totalComments;
 		if(displayJson.comments == null) {
@@ -52,6 +48,14 @@ function ajaxProductByDisplayId() {
 		listReviews.innerHTML = bindTemplate2(data2);
 		
 	});
+	
+	function commentsRate(displayJson) {
+		let totalAvg = document.querySelector(".grade_area .text_value span");
+		totalAvg.innerHTML = displayJson.averageScore.toFixed(1);
+		starRate = (displayJson.averageScore.toFixed(1) / 5.0) * 100;
+		let graphValue = document.querySelector(".graph_value");
+		graphValue.style.width = starRate + "%";
+	}
 	
 	oReq.open("GET", "/reservation/api/products/" + displayId);
 	oReq.send();
