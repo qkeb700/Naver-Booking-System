@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	moreBtn();
 })
 
+// ajax 비동기 통신
 function ajaxImage(){
 	let oReq = new XMLHttpRequest();
 	let promotionItem = document.querySelector("#promotionItem").innerHTML;
@@ -29,6 +30,7 @@ function ajaxImage(){
 	oReq.send();
 }
 
+// 이미지 슬라이드 자동으로 넘어가기
 function imgSlider(){
 	let visualImg = document.querySelector(".visual_img");
 	let totalLength = document.querySelectorAll(".item").length;
@@ -43,6 +45,8 @@ function imgSlider(){
 		index++;
 	}, 2000)
 }
+
+// REST API로 부터 데이터 가져와서 상품 정보 가져오기
 let start = 0;
 function ajaxProducts(start) {
 	let oReq = new XMLHttpRequest();
@@ -73,8 +77,6 @@ function ajaxProducts(start) {
 				lstEventBox[1].innerHTML += input;
 			}	
 		}
-		console.log(itemListLength)
-			console.log(productsFromJson.totalCount)
 		if(itemListLength >= productsFromJson.totalCount - 4) {
 			moreBtn.style.display = "none";
 		}
