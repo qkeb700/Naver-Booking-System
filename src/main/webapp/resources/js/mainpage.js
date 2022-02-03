@@ -85,7 +85,7 @@ function ajaxProducts(start) {
 	oReq.send();
 }
 
-
+// 카테고리 탭을 누르면 관련 상품들 보이기
 function clickCategory(){
 	let categoryList = document.querySelector(".event_tab_lst");
 	let moreBtn = document.querySelector(".more .btn");
@@ -113,6 +113,7 @@ function clickCategory(){
 	});
 }
 
+// 현재 보이는 상품들 지우기
 function deleteProducts(){
 	let lstEventBox = document.querySelectorAll(".lst_event_box");
 	for(let i = 0; i < lstEventBox.length; i++) {
@@ -121,6 +122,7 @@ function deleteProducts(){
 		}
 	}
 }
+// 클릭하면 상품을 4개씩 더 출력
 function moreBtn() {
 	let moreBtn = document.querySelector(".more .btn");
 	
