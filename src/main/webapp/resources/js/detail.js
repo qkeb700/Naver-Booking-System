@@ -111,9 +111,10 @@ function ajaxProductByDisplayId() {
 		Handlebars.registerHelper("saveFileName", function(item){
 			return item.commentImages.shift().saveFileName;
 		});
+		// 백엔드에서 손보는게 보안적으로 효율적
 		Handlebars.registerHelper("email", function(input){
 			return input.substring(0,4) + "****";
-		})
+		});
 		Handlebars.registerHelper("toDouble", function(num){
 			let doubleTypeNum = num.toFixed(1);
 			return doubleTypeNum;
