@@ -82,7 +82,7 @@ function ajaxProductByDisplayId() {
 		// 예매하기 누르면 예매 페이지로 링크
 		let linkReservation = document.querySelector(".section_btn .bk_btn");
 		linkReservation.addEventListener("click", function(){
-			location.href = "/reservation/reserve";
+			location.href = "/reservation/reserve?id=" + displayId;
 		})
 		// 예매자 한줄평 평점, 별점 적용
 		let totalAvg = document.querySelector(".grade_area .text_value span");
