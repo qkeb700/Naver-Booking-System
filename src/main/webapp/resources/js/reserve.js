@@ -87,8 +87,16 @@ TicketSelect.prototype = {
 				let showQtyInput = evt.target.nextSibling.nextSibling;
 				let currentCount = showQtyInput.getAttribute("value");
 				let changedQty = parseInt(currentCount) - 1;
+				if(changedQty <= 0) {
+					changedQty = 0;
+				}
 				showQtyInput.setAttribute("value", changedQty);
-				console.log(changedQty);
+			} else if(evt.target.title === "더하기") {
+				let showQtyInput = document.querySelector(".count_control_input");
+				console.log(showQtyInput);
+				let currentCount = showQtyInput.getAttribute("value");
+				let changedQty = parseInt(currentCount) + 1;
+				showQtyInput.setAttribute("value", changedQty);
 			}
 		})
 	}
