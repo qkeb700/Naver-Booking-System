@@ -18,9 +18,9 @@ AjaxPage.prototype.getApiProduct = function() {
 		displayJson = JSON.parse(oReq.responseText);
 		let ticketSelect = new TicketSelect();
 		
-		ticketSelect.ticketQtyChange(displayJson);
+		ticketSelect.ticketTypeChange(displayJson);
+		ticketSelect.ticketQtyChange();
 		
-		console.log(displayJson);
 	})
 	
 	oReq.open("GET", "/reservation/api/products/" + displayId, true);
@@ -31,14 +31,13 @@ function TicketSelect() {
 	
 }
 TicketSelect.prototype = {
-	ticketQtyChange : function(displayJson){
+	ticketTypeChange : function(displayJson){
 		let reserveTemplate = document.querySelector("#reserveTemplate").innerHTML;
 		let bindTemplate = Handlebars.compile(reserveTemplate);
 		let ticketChange = document.querySelector(".ticket_body");
 		let data = {
 			"productPrices" : displayJson.productPrices 
-		}
-		console.log(displayJson.productPrices);	
+		}	
 		Handlebars.registerHelper("changeType", function(type) {
 			console.log(type);
 			let changedType;
@@ -75,7 +74,23 @@ TicketSelect.prototype = {
 			}
 			return changedType;
 		});
+		Handlebars.registerHelper("numberPoint", function(num) {
+			const cn1 = num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			return cn1;
+		});
 		ticketChange.innerHTML = bindTemplate(data);
+	},
+	ticketQtyChange : function() {
+		let ticketBody = document.querySelector(".ticket_body");
+		ticketBody.addEventListener("click", function(evt) {
+			if(evt.target.title === "빼기") {
+				let showQtyInput = evt.target.nextSibling.nextSibling;
+				let currentCount = showQtyInput.getAttribute("value");
+				let changedQty = parseInt(currentCount) - 1;
+				showQtyInput.setAttribute("value", changedQty);
+				console.log(changedQty);
+			}
+		})
 	}
 	
 }
