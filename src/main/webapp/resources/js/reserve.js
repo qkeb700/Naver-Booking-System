@@ -85,17 +85,25 @@ TicketSelect.prototype = {
 		ticketBody.addEventListener("click", function(evt) {
 			if(evt.target.title === "빼기") {
 				let showQtyInput = evt.target.nextSibling.nextSibling;
+				let minusBtn = document.querySelector(".btn_plus_minus");
 				let currentCount = showQtyInput.getAttribute("value");
+				if(currentCount > 0) {
+					evt.target.classList.remove("disabled");
+				}
 				let changedQty = parseInt(currentCount) - 1;
 				if(changedQty <= 0) {
 					changedQty = 0;
+					minusBtn.classList.add("disabled");
 				}
 				showQtyInput.setAttribute("value", changedQty);
 			} else if(evt.target.title === "더하기") {
 				let showQtyInput = document.querySelector(".count_control_input");
-				console.log(showQtyInput);
+				let minusBtn = document.querySelector(".btn_plus_minus");
 				let currentCount = showQtyInput.getAttribute("value");
 				let changedQty = parseInt(currentCount) + 1;
+				if(changedQty > 0) {
+					minusBtn.classList.remove("disabled");
+				}
 				showQtyInput.setAttribute("value", changedQty);
 			}
 		})
