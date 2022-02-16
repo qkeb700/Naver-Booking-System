@@ -39,7 +39,6 @@ TicketSelect.prototype = {
 			"productPrices" : displayJson.productPrices 
 		}	
 		Handlebars.registerHelper("changeType", function(type) {
-			console.log(type);
 			let changedType;
 			switch(type) {
 				case 'A':
@@ -98,18 +97,25 @@ TicketSelect.prototype = {
 				}
 				showQtyInput.setAttribute("value", changedQty);
 			} else if(evt.target.title === "더하기") {
+				// 수량 개수 나타내는 박스
 				let showQtyInput = evt.target.previousSibling.previousSibling;
 				let plusBtn = evt.target.parentElement.childNodes[3];
 				let minusBtn = evt.target.parentElement.childNodes[1];
-				console.log(plusBtn);
+				let totalPrice = evt.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.childNodes[0];
+				let price = parseInt(evt.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[1].innerHTML)*1000;
+				console.log(price);
+				// 현재 수량의 수
 				let currentCount = showQtyInput.getAttribute("value");
+				// 더하기 버튼 눌러서 하나 추가된 수
 				let changedQty = parseInt(currentCount) + 1;
 				if(changedQty > 0) {
 					plusBtn.classList.remove("disabled");
 					showQtyInput.classList.remove("disabled");
 					minusBtn.classList.remove("disabled");
 				}
+				// 수량 개수 박스에 하나 수량 추가되어진 개수 나타내기
 				showQtyInput.setAttribute("value", changedQty);
+				totalPrice.innerHTML = showQtyInput.getAttribute("value") * price;
 			}
 		})
 	}
