@@ -86,10 +86,15 @@ TicketSelect.prototype = {
 				let showQtyInput = evt.target.nextSibling.nextSibling;
 				let minusBtn = evt.target.parentElement.childNodes[1];
 				let currentCount = showQtyInput.getAttribute("value");
+				let totalPrice = evt.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.childNodes[0];
+				let totalValue = totalPrice.innerHTML;
+				console.log(totalPrice);
+				let price = parseInt(evt.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[1].innerHTML)*1000;
 				if(currentCount > 0) {
 					evt.target.classList.remove("disabled");
 				}
 				let changedQty = parseInt(currentCount) - 1;
+					totalPrice.innerHTML =  totalValue - showQtyInput.getAttribute("value")*price;
 				if(changedQty <= 0) {
 					changedQty = 0;
 					minusBtn.classList.add("disabled");
@@ -103,7 +108,7 @@ TicketSelect.prototype = {
 				let minusBtn = evt.target.parentElement.childNodes[1];
 				let totalPrice = evt.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.childNodes[0];
 				let price = parseInt(evt.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[1].innerHTML)*1000;
-				console.log(price);
+				console.log(totalPrice);
 				// 현재 수량의 수
 				let currentCount = showQtyInput.getAttribute("value");
 				// 더하기 버튼 눌러서 하나 추가된 수
