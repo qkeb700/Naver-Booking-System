@@ -109,6 +109,10 @@ hr {
 #container {
     min-height: 405px;
 }
+.on_color {
+	font-weight: bold;
+	color : black;
+}
 .ct {
     position: relative;
 }

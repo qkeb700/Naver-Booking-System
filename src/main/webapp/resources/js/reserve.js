@@ -93,14 +93,25 @@ TicketSelect.prototype = {
 				if(currentCount > 0) {
 					evt.target.classList.remove("disabled");
 				}
+				
 				let changedQty = parseInt(currentCount) - 1;
-					totalPrice.innerHTML =  totalValue - showQtyInput.getAttribute("value")*price;
 				if(changedQty <= 0) {
 					changedQty = 0;
 					minusBtn.classList.add("disabled");
 					showQtyInput.classList.add("disabled");
 				}
 				showQtyInput.setAttribute("value", changedQty);
+				console.log(currentCount);
+				if(showQtyInput.getAttribute("value") > 0) {
+					totalPrice.innerHTML =  totalValue - price;
+					totalPrice.classList.add("on_color");					
+				} else {
+					totalPrice.innerHTML =  0;
+					totalPrice.classList.add("on_color");
+				}
+				
+				
+					
 			} else if(evt.target.title === "더하기") {
 				// 수량 개수 나타내는 박스
 				let showQtyInput = evt.target.previousSibling.previousSibling;
