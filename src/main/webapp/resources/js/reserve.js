@@ -20,6 +20,7 @@ AjaxPage.prototype.getApiProduct = function() {
 		
 		ticketSelect.ticketTypeChange(displayJson);
 		ticketSelect.ticketQtyChange();
+		ticketSelect.countTotalTickets();
 		
 	})
 	
@@ -88,7 +89,6 @@ TicketSelect.prototype = {
 				let currentCount = showQtyInput.getAttribute("value");
 				let totalPrice = evt.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.childNodes[0];
 				let totalValue = totalPrice.innerHTML;
-				console.log(totalPrice);
 				let price = parseInt(evt.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[1].innerHTML)*1000;
 				if(currentCount > 0) {
 					evt.target.classList.remove("disabled");
@@ -119,7 +119,6 @@ TicketSelect.prototype = {
 				let minusBtn = evt.target.parentElement.childNodes[1];
 				let totalPrice = evt.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.childNodes[0];
 				let price = parseInt(evt.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[1].innerHTML)*1000;
-				console.log(totalPrice);
 				// 현재 수량의 수
 				let currentCount = showQtyInput.getAttribute("value");
 				// 더하기 버튼 눌러서 하나 추가된 수
@@ -133,6 +132,14 @@ TicketSelect.prototype = {
 				showQtyInput.setAttribute("value", changedQty);
 				totalPrice.innerHTML = showQtyInput.getAttribute("value") * price;
 			}
+			// 총 티켓 매수 변경하기
+			let totalCount = document.querySelector("#totalCount");
+			let allTickets = 0;
+			let countControlInput = document.querySelectorAll(".count_control_input");
+			for(let i = 0; i < countControlInput.length; i++) {
+				allTickets += parseInt(countControlInput[i].getAttribute("value"));
+			}
+			totalCount.innerHTML = allTickets;
 		})
 	}
 	
