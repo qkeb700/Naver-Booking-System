@@ -152,5 +152,15 @@ checkValidation.prototype = {
 		let inputName = document.querySelector("input#name");
 		let inputNameValue = inputName.value;
 		let checkIfValid = (/^[가-힣]+$/).test(inputNameValue);
+		
+		if(!inputNameValue) {
+			alert("예매자를 입력해주세요.");
+			inputNameValue.focus();
+		} else if(!checkIfValid) {
+			alert("한글만 입력해주세요.");
+			inputNameValue = "";
+			inputNameValue.focus();
+		}
+		
 	}
 }
