@@ -144,3 +144,13 @@ TicketSelect.prototype = {
 	}
 	
 }
+function checkValidation() {
+	
+}
+checkValidation.prototype = {
+	validName : function() {
+		let inputName = document.querySelector("input#name");
+		let inputNameValue = inputName.value;
+		let checkIfValid = (/^[가-힣]+$/).test(inputNameValue);
+	}
+}
