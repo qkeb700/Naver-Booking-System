@@ -155,12 +155,26 @@ checkValidation.prototype = {
 		
 		if(!inputNameValue) {
 			alert("예매자를 입력해주세요.");
-			inputNameValue.focus();
+			inputName.focus();
 		} else if(!checkIfValid) {
 			alert("한글만 입력해주세요.");
 			inputNameValue = "";
-			inputNameValue.focus();
+			inputName.focus();
 		}
 		
+	},
+	validTel : function() {
+		let inputTel = document.querySelector("#tel");
+		let telValue = inputTel.value;
+		let checkIfValid = (/^\d{3}-\d{3,4}-\d{4}$/).test(telValue);
+		
+		if(!telValue) {
+			alert("예매자를 입력해주세요.");
+			inputTel.focus();
+		} else if(!checkIfValid) {
+			alert("연락처 번호를 다시 확인해주세요.");
+			telValue = "";
+			inputTel.focus();
+		}	
 	}
 }
