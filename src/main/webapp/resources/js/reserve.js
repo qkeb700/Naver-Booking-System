@@ -176,5 +176,18 @@ checkValidation.prototype = {
 			telValue = "";
 			inputTel.focus();
 		}	
+	},
+	validEmail : function() {
+		let inputEmail = document.querySelector("#email");
+		let emailValue = inputEmail.value;
+		let checkIfValid = (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(emailValue);
+	
+		if(!emailValue) {
+			alert("이메일을 입력해주세요.");
+			inputEmail.focus();
+		} else if(!checkIfValid){
+			alert("이메일 형식이 잘못됐습니다. 다시 입력해주세요.");
+			inputEmail.focus();
+		}
 	}
 }
