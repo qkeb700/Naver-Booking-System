@@ -191,3 +191,12 @@ checkValidation.prototype = {
 		}
 	}
 }
+
+function AgreementCheck() {
+	
+}
+AgreementCheck.prototype = {
+	clickAgreement : function() {
+		let agreementBox = document.querySelector(".section_booking_agreement");
+	}
+}
