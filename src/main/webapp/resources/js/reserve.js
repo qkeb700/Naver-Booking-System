@@ -198,5 +198,13 @@ function AgreementCheck() {
 AgreementCheck.prototype = {
 	clickAgreement : function() {
 		let agreementBox = document.querySelector(".section_booking_agreement");
+		agreementBox.addEventListener("click", function(evt){
+			let agreement;
+			if(evt.target.classList.contains('.btn_agreement')) {
+				agreement = evt.target.closest('.agreement');
+			}
+		})
 	}
 }
+
+
