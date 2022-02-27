@@ -17,10 +17,13 @@ AjaxPage.prototype.getApiProduct = function() {
 	oReq.addEventListener("load", function(){
 		displayJson = JSON.parse(oReq.responseText);
 		let ticketSelect = new TicketSelect();
+		let agreementCheck = new AgreementCheck();
 		
 		ticketSelect.ticketTypeChange(displayJson);
 		ticketSelect.ticketQtyChange();
-		ticketSelect.countTotalTickets();
+		//ticketSelect.countTotalTickets();
+		
+		agreementCheck.clickAgreement();
 		
 	})
 	
@@ -200,8 +203,16 @@ AgreementCheck.prototype = {
 		let agreementBox = document.querySelector(".section_booking_agreement");
 		agreementBox.addEventListener("click", function(evt){
 			let agreement;
-			if(evt.target.classList.contains('.btn_agreement')) {
+			if(evt.target.classList.contains('.btn_agreement') || evt.target.classList.contains('btn_text')
+						|| evt.target.classList.contains('fn-down2')) {
 				agreement = evt.target.closest('.agreement');
+				if(agreement.classList.contains('open')) {
+					agreement.classList.remove('open');
+					agreement.childNodes[3].childNodes[1].innerHTML = '보기';
+				} else {
+					agreement.classList.add('open');
+					agreement.childNodes[3].childNodes[1].innerHTML = '닫기';
+				}
 			}
 		})
 	}
