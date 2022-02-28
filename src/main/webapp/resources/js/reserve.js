@@ -24,6 +24,7 @@ AjaxPage.prototype.getApiProduct = function() {
 		//ticketSelect.countTotalTickets();
 		
 		agreementCheck.clickAgreement();
+		agreementCheck.disableAgreement();
 		
 	})
 	
@@ -213,6 +214,17 @@ AgreementCheck.prototype = {
 					agreement.classList.add('open');
 					agreement.childNodes[3].childNodes[1].innerHTML = '닫기';
 				}
+			}
+		})
+	},
+	disableAgreement : function() {
+		let checkInput = document.querySelector("#chk3");
+		let reserveBtn = document.querySelector('.bk_btn_wrap');
+		checkInput.addEventListener("click", function() {
+			if(checkInput.checked == true) {
+				reserveBtn.classList.remove('disable');
+			} else {
+				reserveBtn.classList.add('disable');
 			}
 		})
 	}
