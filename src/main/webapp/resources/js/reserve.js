@@ -16,8 +16,11 @@ AjaxPage.prototype.getApiProduct = function() {
 	
 	oReq.addEventListener("load", function(){
 		displayJson = JSON.parse(oReq.responseText);
+		let productImageChange = new ProductImageChange();
 		let ticketSelect = new TicketSelect();
 		let agreementCheck = new AgreementCheck();
+		
+		productImageChange.imageChange(displayJson);
 		
 		ticketSelect.ticketTypeChange(displayJson);
 		ticketSelect.ticketQtyChange();
@@ -30,6 +33,14 @@ AjaxPage.prototype.getApiProduct = function() {
 	
 	oReq.open("GET", "/reservation/api/products/" + displayId, true);
 	oReq.send();
+}
+
+function ProductImageChange() {
+	
+}
+ProductImageChange.prototype.imageChange = function(displayJson) {
+	let imgThumb = document.querySelector(".img_thumb");
+	imgThumb.src = "/reservation/resources/" + displayJson.productImages.shift().saveFileName;
 }
 
 function TicketSelect() {
