@@ -50,7 +50,7 @@
                     <div class="store_details">
                         <h3 class="in_tit"></h3>
                         <p class="dsc">
-                            장소 : <br> 기간 : 2017.2.17.(금)~2017.4.18.(화)
+                            장소 : <span id="placeLot"></span> <br> 기간 : <span id="openingHours">2017.2.17.(금)~2017.4.18.(화)</span>
                         </p>
                         <h3 class="in_tit">관람시간</h3>
                         <p class="dsc">

@@ -17,10 +17,13 @@ AjaxPage.prototype.getApiProduct = function() {
 	oReq.addEventListener("load", function(){
 		displayJson = JSON.parse(oReq.responseText);
 		let productImageChange = new ProductImageChange();
+		let detailInformation = new DetailInformation();
 		let ticketSelect = new TicketSelect();
 		let agreementCheck = new AgreementCheck();
 		
 		productImageChange.imageChange(displayJson);
+		
+		detailInformation.detailInfo(displayJson);
 		
 		ticketSelect.ticketTypeChange(displayJson);
 		ticketSelect.ticketQtyChange();
@@ -41,6 +44,19 @@ function ProductImageChange() {
 ProductImageChange.prototype.imageChange = function(displayJson) {
 	let imgThumb = document.querySelector(".img_thumb");
 	imgThumb.src = "/reservation/resources/" + displayJson.productImages.shift().saveFileName;
+}
+function DetailInformation() {
+	
+}
+DetailInformation.prototype.detailInfo = function(displayJson) {
+	let placeLot = document.querySelector('.store_details #placeLot');
+	let openingHours = document.querySelector(".store_details #openingHours");
+	let businessHours = document.querySelector(".store_details").childNodes[7];
+	openingHours.innerHTML = displayJson.displayInfo.openingHours;
+	placeLot.innerHTML = displayJson.displayInfo.placeLot;
+	let array = openingHours.innerHTML.split('\n');
+	openingHours.innerHTML = array[0];
+	businessHours.innerHTML = array[1];	
 }
 
 function TicketSelect() {
