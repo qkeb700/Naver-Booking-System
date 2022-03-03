@@ -21,6 +21,8 @@ AjaxPage.prototype.getApiProduct = function() {
 		let ticketSelect = new TicketSelect();
 		let agreementCheck = new AgreementCheck();
 		
+		let requestData = new RequestData();
+		
 		productImageChange.imageChange(displayJson);
 		
 		detailInformation.detailInfo(displayJson);
@@ -31,6 +33,8 @@ AjaxPage.prototype.getApiProduct = function() {
 		
 		agreementCheck.clickAgreement();
 		agreementCheck.disableAgreement();
+		
+		requestData.createPricesData();
 		
 	})
 	
@@ -175,10 +179,10 @@ TicketSelect.prototype = {
 	}
 	
 }
-function checkValidation() {
+function CheckValidation() {
 	
 }
-checkValidation.prototype = {
+CheckValidation.prototype = {
 	validName : function() {
 		let inputName = document.querySelector("input#name");
 		let inputNameValue = inputName.value;
@@ -254,6 +258,27 @@ AgreementCheck.prototype = {
 				reserveBtn.classList.add('disable');
 			}
 		})
+	}
+}
+function Price(count, productPriceId) {
+	this.count = count;
+	this.productPriceId = productPriceId;
+}
+function RequestData() {
+	
+}
+RequestData.prototype = {
+	createPricesData : function() {
+		let ticketQty = document.querySelectorAll(".ticket_body .qty");
+		let prices = [];
+		ticketQty.forEach(function(item){
+			let count = item.childNodes[1].childNodes[3].childNodes[3].value;
+			let productPriceId = item.dataset.productpriceid;
+			let price = new Price(count, productPriceId);
+			prices.push(price);
+		});
+		console.log(prices);
+		return prices;
 	}
 }
 
