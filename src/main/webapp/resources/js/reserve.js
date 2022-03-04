@@ -29,12 +29,12 @@ AjaxPage.prototype.getApiProduct = function() {
 		
 		ticketSelect.ticketTypeChange(displayJson);
 		ticketSelect.ticketQtyChange();
-		//ticketSelect.countTotalTickets();
 		
 		agreementCheck.clickAgreement();
 		agreementCheck.disableAgreement();
 		
 		requestData.createPricesData();
+		requestData.createClientData();
 		
 	})
 	
@@ -264,6 +264,12 @@ function Price(count, productPriceId) {
 	this.count = count;
 	this.productPriceId = productPriceId;
 }
+function RequestSend(prices, clientName, clientPhone, clientEmail) {
+	this.prices = prices;
+	this.clientName = clientName;
+	this.clientPhone = clientPhone;
+	this.clientEmail = clientEmail;
+}
 function RequestData() {
 	
 }
@@ -277,8 +283,15 @@ RequestData.prototype = {
 			let price = new Price(count, productPriceId);
 			prices.push(price);
 		});
-		console.log(prices);
 		return prices;
+	},
+	createClientData : function() {
+		let prices = this.createPricesData();
+		let clientName = document.querySelector('#name').value;
+		let clientPhone = document.querySelector('#tel').value;
+		let clientEmail = document.querySelector('#email').value;
+		
+		return new RequestSend(prices, clientName, clientPhone, clientEmail);
 	}
 }
 
