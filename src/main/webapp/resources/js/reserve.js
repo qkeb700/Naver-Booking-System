@@ -191,11 +191,14 @@ CheckValidation.prototype = {
 		if(!inputNameValue) {
 			alert("예매자를 입력해주세요.");
 			inputName.focus();
+			return false;
 		} else if(!checkIfValid) {
 			alert("한글만 입력해주세요.");
 			inputNameValue = "";
 			inputName.focus();
+			return false;
 		}
+		return true;
 		
 	},
 	validTel : function() {
@@ -206,11 +209,14 @@ CheckValidation.prototype = {
 		if(!telValue) {
 			alert("예매자를 입력해주세요.");
 			inputTel.focus();
+			return false;
 		} else if(!checkIfValid) {
 			alert("연락처 번호를 다시 확인해주세요.");
 			telValue = "";
 			inputTel.focus();
+			return false;
 		}	
+		return true;
 	},
 	validEmail : function() {
 		let inputEmail = document.querySelector("#email");
@@ -220,10 +226,13 @@ CheckValidation.prototype = {
 		if(!emailValue) {
 			alert("이메일을 입력해주세요.");
 			inputEmail.focus();
+			return false;
 		} else if(!checkIfValid){
 			alert("이메일 형식이 잘못됐습니다. 다시 입력해주세요.");
 			inputEmail.focus();
+			return false;
 		}
+		return true;
 	}
 }
 
@@ -294,5 +303,30 @@ RequestData.prototype = {
 		return new RequestSend(prices, clientName, clientPhone, clientEmail);
 	}
 }
-
+function SubmitSection() {
+	
+}
+SubmitSection.prototype = {
+	submitClick : function() {
+		let submitBtn = document.querySelector('.bk_btn_wrap');
+		submitBtn.addEventListener('click', function() {
+			let checkValidation = new CheckValidation();
+			let validName = checkValidation.validName();
+			let validEmail = checkValidation.validEmail();
+			let validTel = checkValidation.validTel();
+			if(validName && validEmail && validTel) {
+				let requestData = new RequestData();
+				let clientData = requestData.createClientData();
+				
+				let oReq = new XMLHttpRequest();
+				oReq.addEventListener("load", function() {
+					alert("예매에 성공하였습니다.");
+					location.href = "/reservation/";
+				});
+				oReq.open("POST", "/reservation/api/", true);
+				oReq.send();
+			}
+		})
+	}
+}
 
