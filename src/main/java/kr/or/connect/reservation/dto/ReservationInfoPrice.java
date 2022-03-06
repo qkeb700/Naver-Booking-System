@@ -1,16 +1,17 @@
 package kr.or.connect.reservation.dto;
 
 public class ReservationInfoPrice {
-	private int id;
+	private int reservationInfoPriceId;
 	private int reservationInfoId;
 	private int productPriceId;
 	private int count;
 	
-	public int getId() {
-		return id;
+	
+	public int getReservationInfoPriceId() {
+		return reservationInfoPriceId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setReservationInfoPriceId(int reservationInfoPriceId) {
+		this.reservationInfoPriceId = reservationInfoPriceId;
 	}
 	public int getReservationInfoId() {
 		return reservationInfoId;
@@ -32,7 +33,7 @@ public class ReservationInfoPrice {
 	}
 	@Override
 	public String toString() {
-		return "ReservationInfoPrice [id=" + id + ", reservationInfoId=" + reservationInfoId + ", productPriceId="
+		return "ReservationInfoPrice [id=" + reservationInfoPriceId + ", reservationInfoId=" + reservationInfoId + ", productPriceId="
 				+ productPriceId + ", count=" + count + "]";
 	}
 	

@@ -20,8 +20,8 @@ AjaxPage.prototype.getApiProduct = function() {
 		let detailInformation = new DetailInformation();
 		let ticketSelect = new TicketSelect();
 		let agreementCheck = new AgreementCheck();
+		let submitSection = new SubmitSection();
 		
-		let requestData = new RequestData();
 		
 		productImageChange.imageChange(displayJson);
 		
@@ -33,8 +33,7 @@ AjaxPage.prototype.getApiProduct = function() {
 		agreementCheck.clickAgreement();
 		agreementCheck.disableAgreement();
 		
-		requestData.createPricesData();
-		requestData.createClientData();
+		submitSection.submitClick();
 		
 	})
 	
@@ -269,9 +268,11 @@ AgreementCheck.prototype = {
 		})
 	}
 }
-function Price(count, productPriceId) {
+function Price(count, productPriceId, reservationInfoId, reservationInfoPriceId) {
 	this.count = count;
 	this.productPriceId = productPriceId;
+	this.reservationInfoId = reservationInfoId;
+	this.reservationInfoPriceId = reservationInfoPriceId;
 }
 function RequestSend(prices, clientName, clientPhone, clientEmail) {
 	this.prices = prices;
@@ -323,7 +324,7 @@ SubmitSection.prototype = {
 					alert("예매에 성공하였습니다.");
 					location.href = "/reservation/";
 				});
-				oReq.open("POST", "/reservation/api/", true);
+				oReq.open("POST", "/reservation/api/reservations", true);
 				oReq.send();
 			}
 		})
