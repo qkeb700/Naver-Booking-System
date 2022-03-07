@@ -33,7 +33,7 @@ AjaxPage.prototype.getApiProduct = function() {
 		agreementCheck.clickAgreement();
 		agreementCheck.disableAgreement();
 		
-		submitSection.submitClick();
+		submitSection.submitClick(displayJson);
 		
 	})
 	
@@ -206,7 +206,7 @@ CheckValidation.prototype = {
 		let checkIfValid = (/^\d{3}-\d{3,4}-\d{4}$/).test(telValue);
 		
 		if(!telValue) {
-			alert("예매자를 입력해주세요.");
+			alert("연락처를 입력해주세요.");
 			inputTel.focus();
 			return false;
 		} else if(!checkIfValid) {
@@ -274,11 +274,14 @@ function Price(count, productPriceId, reservationInfoId, reservationInfoPriceId)
 	this.reservationInfoId = reservationInfoId;
 	this.reservationInfoPriceId = reservationInfoPriceId;
 }
-function RequestSend(prices, clientName, clientPhone, clientEmail) {
+function RequestSend(prices, productId, displayInfoId, reservationName, reservationTel, reservationEmail, reservationDate) {
 	this.prices = prices;
-	this.clientName = clientName;
-	this.clientPhone = clientPhone;
-	this.clientEmail = clientEmail;
+	this.productId = productId;
+	this.displayInfoId = displayInfoId;
+	this.reservationName = reservationName;
+	this.reservationTel = reservationTel;
+	this.reservationEmail = reservationEmail;
+	this.reservationDate = reservationDate;
 }
 function RequestData() {
 	
@@ -295,29 +298,32 @@ RequestData.prototype = {
 		});
 		return prices;
 	},
-	createClientData : function() {
+	createClientData : function(displayJson) {
 		let prices = this.createPricesData();
-		let clientName = document.querySelector('#name').value;
-		let clientPhone = document.querySelector('#tel').value;
-		let clientEmail = document.querySelector('#email').value;
+		let productId = displayJson.displayInfo.productId;
+		let displayInfoId = displayJson.displayInfo.displayInfoId;
+		let reservationName = document.querySelector('#name').value;
+		let reservationTel = document.querySelector('#tel').value;
+		let reservationEmail = document.querySelector('#email').value;
+		let reservationDate = document.querySelector("#reservationDate").innerHTML;
 		
-		return new RequestSend(prices, clientName, clientPhone, clientEmail);
+		return new RequestSend(prices, productId, displayInfoId, reservationName, reservationTel, reservationEmail, reservationDate);
 	}
 }
 function SubmitSection() {
 	
 }
 SubmitSection.prototype = {
-	submitClick : function() {
+	submitClick : function(displayJson) {
 		let submitBtn = document.querySelector('.bk_btn_wrap');
 		submitBtn.addEventListener('click', function() {
 			let checkValidation = new CheckValidation();
 			let validName = checkValidation.validName();
-			let validEmail = checkValidation.validEmail();
 			let validTel = checkValidation.validTel();
-			if(validName && validEmail && validTel) {
+			let validEmail = checkValidation.validEmail();
+			if(validName && validTel && validEmail) {
 				let requestData = new RequestData();
-				let clientData = requestData.createClientData();
+				let clientData = requestData.createClientData(displayJson);
 				
 				let oReq = new XMLHttpRequest();
 				oReq.addEventListener("load", function() {
@@ -325,7 +331,8 @@ SubmitSection.prototype = {
 					location.href = "/reservation/";
 				});
 				oReq.open("POST", "/reservation/api/reservations", true);
-				oReq.send();
+				oReq.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+				oReq.send(JSON.stringify(clientData));
 			}
 		})
 	}
