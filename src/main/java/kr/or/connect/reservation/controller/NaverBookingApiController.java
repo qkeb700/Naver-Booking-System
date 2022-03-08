@@ -15,6 +15,7 @@ import kr.or.connect.reservation.dto.Product;
 import kr.or.connect.reservation.dto.ProductDisplay;
 import kr.or.connect.reservation.dto.ProductItems;
 import kr.or.connect.reservation.dto.Promotion;
+import kr.or.connect.reservation.dto.ReservationInfo;
 import kr.or.connect.reservation.service.CategoryService;
 import kr.or.connect.reservation.service.ProductDisplayService;
 import kr.or.connect.reservation.service.ProductService;
@@ -72,4 +73,7 @@ public class NaverBookingApiController {
 	public ProductDisplay getProductsByDisplayId(@PathVariable int displayInfoId) {
 		return productDisplayService.getProductDisplay(displayInfoId);
 	}
+	
+	
+	
 }
