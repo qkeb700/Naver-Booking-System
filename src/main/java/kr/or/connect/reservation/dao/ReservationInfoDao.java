@@ -26,6 +26,10 @@ public class ReservationInfoDao {
 							"create_date", "modify_date");
 	}
 	public List<ReservationInfo> selectByEmail(String reservationEmail) {
-		return jdbc.query(ReservationInfoDaoSql, Collections.singletonMap("reservationEmail", reservationEmail), rowMapper);
+		return jdbc.query(ReservationInfoDaoSql.SELECT_BY_EMAIL, Collections.singletonMap("reservationEmail", reservationEmail), rowMapper);
+	}
+	
+	public int selectTotalPrice() {
+		
 	}
 }
