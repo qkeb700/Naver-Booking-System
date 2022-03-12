@@ -33,11 +33,30 @@ public class ReservationInfoDao {
 	
 	public int selectTotalPrice(String reservationEmail, int productId, int displayInfoId) {
 		int totalPrice;
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("reservationEmail", reservationEmail);
-		params.put("productId", productId);
-		params.put("displayInfoId", displayInfoId);
-		totalPrice = jdbc.queryForObject(ReservationInfoDaoSql.SELECT_TOTAL_PRICE, params, Integer.class);
+		try {
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("reservationEmail", reservationEmail);
+			params.put("productId", productId);
+			params.put("displayInfoId", displayInfoId);
+			totalPrice = jdbc.queryForObject(ReservationInfoDaoSql.SELECT_TOTAL_PRICE, params, Integer.class);			
+		} catch(NullPointerException e) {
+			totalPrice = 0;
+		} catch(Exception e) {
+			e.printStackTrace();
+			totalPrice = 0;
+		}
 		return totalPrice;
 	}
+	public int selectIdByEmail(String reservationEmail) {
+		int id;
+		try { 
+			id = jdbc.queryForObject(ReservationInfoDaoSql.SELECT_ID_BY_EMAIL, Collections.singletonMap("reservationEmail", reservationEmail), Integer.class);
+		}catch(NullPointerException e) {
+			id = 0;
+		}catch(Exception e) {
+			e.printStackTrace();
+			id = 0;
+		}
+		return id;
+	} 
 }
