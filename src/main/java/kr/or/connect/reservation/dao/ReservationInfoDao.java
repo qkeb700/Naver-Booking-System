@@ -1,7 +1,9 @@
 package kr.or.connect.reservation.dao;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -29,7 +31,13 @@ public class ReservationInfoDao {
 		return jdbc.query(ReservationInfoDaoSql.SELECT_BY_EMAIL, Collections.singletonMap("reservationEmail", reservationEmail), rowMapper);
 	}
 	
-	public int selectTotalPrice() {
-		
+	public int selectTotalPrice(String reservationEmail, int productId, int displayInfoId) {
+		int totalPrice;
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("reservationEmail", reservationEmail);
+		params.put("productId", productId);
+		params.put("displayInfoId", displayInfoId);
+		totalPrice = jdbc.queryForObject(ReservationInfoDaoSql.SELECT_TOTAL_PRICE, params, Integer.class);
+		return totalPrice;
 	}
 }
