@@ -65,5 +65,18 @@ public class ReservationInfoDao {
 		params.put("cancelFlag", cancelFlag);
 		params.put("modifyDate", modifyDate);
 		return jdbc.update(ReservationInfoDaoSql.SELECT_BY_EMAIL, params);
+	} 
+	public int insert(ReservationInfo reservationInfo) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("product_id", reservationInfo.getProductId());
+	    params.put("display_info_id", reservationInfo.getDisplayInfoId());
+	    params.put("reservation_name", reservationInfo.getReservationName());
+	    params.put("reservation_tel", reservationInfo.getReservationTel());
+	    params.put("reservation_email", reservationInfo.getReservationEmail());
+	    params.put("reservation_date", reservationInfo.getReservationDate());
+	    params.put("create_date", reservationInfo.getCreateDate());
+	    params.put("modify_date", reservationInfo.getModifyDate());
+
+	    return insertAction.executeAndReturnKey(params).intValue();
 	}
 }
