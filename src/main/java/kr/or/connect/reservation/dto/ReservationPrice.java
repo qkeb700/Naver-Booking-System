@@ -1,6 +1,6 @@
 package kr.or.connect.reservation.dto;
 
-public class ReservationInfoPrice {
+public class ReservationPrice {
 	private int reservationInfoPriceId;
 	private int reservationInfoId;
 	private int productPriceId;
