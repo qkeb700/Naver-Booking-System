@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import kr.or.connect.reservation.dao.DisplayInfoDao;
 import kr.or.connect.reservation.dao.ReservationInfoDao;
 import kr.or.connect.reservation.dao.ReservationInfoPriceDao;
+import kr.or.connect.reservation.dto.DisplayInfo;
 import kr.or.connect.reservation.dto.ReservationInfo;
 import kr.or.connect.reservation.dto.ReservationInfoPriceDto;
 import kr.or.connect.reservation.dto.ReservationInfoSetDto;
+import kr.or.connect.reservation.dto.ReservationInfoSetItem;
 import kr.or.connect.reservation.service.ReservationService;
 
 public class ReservationServiceImpl implements ReservationService {
@@ -24,7 +26,19 @@ public class ReservationServiceImpl implements ReservationService {
 	public ReservationInfoSetDto getReservationInfoSet(String reservationEmail) {
 		ReservationInfoSetDto reservationInfoSet = new ReservationInfoSetDto();
 		List<ReservationInfo> reservationInfos = reservationInfoDao.selectByEmail(reservationEmail);
-		return null;
+		int totalPrice;
+		for(ReservationInfo reservationInfo : reservationInfos) {
+			ReservationInfoSetItem reservationInfoSetItem = new ReservationInfoSetItem();
+			totalPrice = reservationInfoDao.selectTotalPrice(reservationEmail, reservationInfo.getProductId(), reservationInfo.getDisplayInfoId());
+			DisplayInfo displayInfo = displayInfoDao.selectById(reservationInfo.getDisplayInfoId());
+			reservationInfoSetItem.setReservationInfo(reservationInfo);
+			reservationInfoSetItem.setDisplayInfo(displayInfo);
+			reservationInfoSetItem.setTotalPrice(totalPrice);
+			
+			reservationInfoSet.addReservationItem(reservationInfoSetItem);
+			reservationInfoSet.addSize(1);
+		}
+		return reservationInfoSet;
 	}
 
 	@Override
