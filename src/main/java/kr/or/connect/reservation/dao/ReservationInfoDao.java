@@ -74,6 +74,7 @@ public class ReservationInfoDao {
 	    params.put("reservation_tel", reservationInfo.getReservationTel());
 	    params.put("reservation_email", reservationInfo.getReservationEmail());
 	    params.put("reservation_date", reservationInfo.getReservationDate());
+	    params.put("cancel_flag", reservationInfo.getCancelFlag());
 	    params.put("create_date", reservationInfo.getCreateDate());
 	    params.put("modify_date", reservationInfo.getModifyDate());
 

@@ -12,6 +12,7 @@ import kr.or.connect.reservation.dto.ReservationInfo;
 import kr.or.connect.reservation.dto.ReservationInfoPriceDto;
 import kr.or.connect.reservation.dto.ReservationInfoSetDto;
 import kr.or.connect.reservation.dto.ReservationInfoSetItem;
+import kr.or.connect.reservation.dto.ReservationPrice;
 import kr.or.connect.reservation.service.ReservationService;
 
 public class ReservationServiceImpl implements ReservationService {
@@ -42,9 +43,19 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public ReservationInfoPriceDto addReservation(ReservationInfoPriceDto reservationDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public ReservationInfoPriceDto addReservation(ReservationInfoPriceDto reservationInfoPrice) {
+		ReservationInfoPriceDto reservationInfoPriceDto;
+		ReservationInfo reservationInfo = new ReservationInfo();
+		int reservationInfoId = reservationInfoDao.insert(reservationInfo);
+		reservationInfoPrice.setReservationInfoById(reservationInfoId);
+		
+		for(ReservationPrice reservationPrice : reservationInfoPrice.getPrices()) {
+			if(reservationPrice.getCount() > 0) {
+				reservationInfoPriceDao.insert(reservationPrice);
+			}
+		}
+		reservationInfoPriceDto = getReservationInfoById(reservationInfoId);
+		return reservationInfoPriceDto;
 	}
 
 	@Override
