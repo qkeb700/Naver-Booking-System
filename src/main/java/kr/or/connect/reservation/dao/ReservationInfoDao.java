@@ -59,11 +59,10 @@ public class ReservationInfoDao {
 		}
 		return id;
 	}
-	public int updateCancelFlagById(int reservationInfoId, int cancelFlag, String modifyDate) {
+	public int updateCancelFlagById(int reservationInfoId, int cancelFlag) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("reservationInfoId", reservationInfoId);
 		params.put("cancelFlag", cancelFlag);
-		params.put("modifyDate", modifyDate);
 		return jdbc.update(ReservationInfoDaoSql.SELECT_BY_EMAIL, params);
 	} 
 	public int insert(ReservationInfo reservationInfo) {

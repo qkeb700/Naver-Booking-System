@@ -9,5 +9,5 @@ public class ReservationInfoDaoSql {
 
 	public static final String SELECT_ID_BY_EMAIL = "SELECT id FROM reservation_info WHERE reservation_email = :reservationEmail";
 	
-	public static final String UPDATE_CANCEL_FLAG_BY_ID = "UPDATE reservation_info SET cancel_flag = :cancelFlag, modify_date = :modifyDate WHERE id = :reservationInfoId";
+	public static final String UPDATE_CANCEL_FLAG_BY_ID = "UPDATE reservation_info SET cancel_flag = :cancelFlag WHERE id = :reservationInfoId";
 }

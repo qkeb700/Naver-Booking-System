@@ -60,14 +60,20 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public ReservationInfoPriceDto changeCancelFlagById(int reservationId) {
-		// TODO Auto-generated method stub
-		return null;
+		reservationInfoDao.updateCancelFlagById(reservationId, 1);
+		ReservationInfoPriceDto updatedReservation = getReservationInfoById(reservationId);
+		return updatedReservation;
 	}
 
 	@Override
-	public ReservationInfoPriceDto getReservationInfoById(int reservationId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ReservationInfoPriceDto getReservationInfoById(String reservationEmail, int reservationId) {
+		ReservationInfoPriceDto reservationInfoPrice = new ReservationInfoPriceDto();
+		ReservationInfo reservationInfo = reservationInfoDao.selectByEmail(reservationEmail).get(0);
+		List<ReservationPrice> prices = reservationInfoPriceDao.getPriceList(reservationId);
+		
+		reservationInfoPrice.setReservationInfo(reservationInfo);
+		reservationInfoPrice.setPrices(prices);
+		return reservationInfoPrice;
 	}
 
 	@Override
