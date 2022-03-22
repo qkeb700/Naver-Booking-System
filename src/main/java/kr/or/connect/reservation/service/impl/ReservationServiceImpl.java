@@ -66,9 +66,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public ReservationInfoPriceDto getReservationInfoById(String reservationEmail, int reservationId) {
+	public ReservationInfoPriceDto getReservationInfoById(int reservationId) {
 		ReservationInfoPriceDto reservationInfoPrice = new ReservationInfoPriceDto();
-		ReservationInfo reservationInfo = reservationInfoDao.selectByEmail(reservationEmail).get(0);
+		ReservationInfo reservationInfo = reservationInfoDao.getReservationInfo(reservationId);
 		List<ReservationPrice> prices = reservationInfoPriceDao.getPriceList(reservationId);
 		
 		reservationInfoPrice.setReservationInfo(reservationInfo);
@@ -78,7 +78,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public boolean existReservation(String reservationEmail) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

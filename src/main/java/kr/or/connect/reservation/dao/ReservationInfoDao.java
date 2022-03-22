@@ -59,6 +59,10 @@ public class ReservationInfoDao {
 		}
 		return id;
 	}
+	public ReservationInfo getReservationInfo(int reservationId) {
+		List<ReservationInfo> reservationInfoList = jdbc.query(ReservationInfoDaoSql.SELECT_BY_Id, Collections.singletonMap("reservationInfoId", reservationId), rowMapper);
+		return reservationInfoList.isEmpty() ? null : reservationInfoList.get(0);
+	}
 	public int updateCancelFlagById(int reservationInfoId, int cancelFlag) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("reservationInfoId", reservationInfoId);
