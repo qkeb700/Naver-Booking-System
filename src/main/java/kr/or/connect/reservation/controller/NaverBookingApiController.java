@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +18,13 @@ import kr.or.connect.reservation.dto.ProductDisplay;
 import kr.or.connect.reservation.dto.ProductItems;
 import kr.or.connect.reservation.dto.Promotion;
 import kr.or.connect.reservation.dto.ReservationInfo;
+import kr.or.connect.reservation.dto.ReservationInfoPriceDto;
+import kr.or.connect.reservation.dto.ReservationInfoSetDto;
 import kr.or.connect.reservation.service.CategoryService;
 import kr.or.connect.reservation.service.ProductDisplayService;
 import kr.or.connect.reservation.service.ProductService;
 import kr.or.connect.reservation.service.PromotionService;
+import kr.or.connect.reservation.service.ReservationService;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -35,6 +40,9 @@ public class NaverBookingApiController {
 	
 	@Autowired
 	ProductDisplayService productDisplayService;
+	
+	@Autowired
+	ReservationService reservationService;
 	
 	@GetMapping("/categories")
 	public List<Category> getCategories() {
@@ -74,6 +82,14 @@ public class NaverBookingApiController {
 		return productDisplayService.getProductDisplay(displayInfoId);
 	}
 	
+	@GetMapping("/reservations")
+	public ReservationInfoSetDto getReservationInfoSet(@RequestParam(value="reservationEmail", required = true) String reservationEmail) {
+		return reservationService.getReservationInfoSet(reservationEmail);
+	}
+	@PostMapping("/reservations")
+	public ReservationInfoPriceDto addReservationInfo(@RequestBody ReservationInfoPriceDto reservationInfoPriceDto) {
+		return reservationService.addReservation(reservationInfoPriceDto);
+	}
 	
 	
 }
