@@ -3,6 +3,7 @@ package kr.or.connect.reservation.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import kr.or.connect.reservation.dao.DisplayInfoDao;
 import kr.or.connect.reservation.dao.ReservationInfoDao;
@@ -15,6 +16,7 @@ import kr.or.connect.reservation.dto.ReservationInfoSetItem;
 import kr.or.connect.reservation.dto.ReservationPrice;
 import kr.or.connect.reservation.service.ReservationService;
 
+@Service
 public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private ReservationInfoDao reservationInfoDao;
@@ -23,7 +25,6 @@ public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private DisplayInfoDao displayInfoDao;
 	@Override
-	
 	public ReservationInfoSetDto getReservationInfoSet(String reservationEmail) {
 		ReservationInfoSetDto reservationInfoSet = new ReservationInfoSetDto();
 		List<ReservationInfo> reservationInfos = reservationInfoDao.selectByEmail(reservationEmail);

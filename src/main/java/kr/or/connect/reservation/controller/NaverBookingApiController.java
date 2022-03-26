@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -84,11 +85,11 @@ public class NaverBookingApiController {
 	}
 	
 	@GetMapping("/reservations")
-	public ReservationInfoSetDto getReservationInfoSet(@RequestParam(value="reservationEmail", required = true) String reservationEmail) {
+	public ReservationInfoSetDto getReservationInfoSet(@RequestParam(value="reservationEmail", required = true, defaultValue = "") String reservationEmail) {
 		return reservationService.getReservationInfoSet(reservationEmail);
 	}
 	@PostMapping("/reservations")
-	public ReservationInfoPriceDto addReservationInfo(@RequestBody ReservationInfoPriceDto reservationInfoPriceDto) {
+	public ReservationInfoPriceDto addReservationInfo(@RequestBody(required=true)@Validated ReservationInfoPriceDto reservationInfoPriceDto) {
 		return reservationService.addReservation(reservationInfoPriceDto);
 	}
 	@PutMapping("/reservations/{reservationId}")
