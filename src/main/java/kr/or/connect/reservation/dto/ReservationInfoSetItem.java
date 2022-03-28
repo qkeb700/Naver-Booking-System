@@ -1,17 +1,17 @@
 package kr.or.connect.reservation.dto;
 
 public class ReservationInfoSetItem {
-	private int reservationInfoId;
-	private int productId;
-	private int displayInfoId;
-	private String reservationName;
-	private String reservationTel;
-	private String reservationEmail;
-	private String reservationDate;
-	private int cancelFlag;
-	private String createDate;
-	private String modifyDate;
-	private DisplayInfo displayInfo;
+	public int reservationInfoId;
+	public int productId;
+	public int displayInfoId;
+	public String reservationName;
+	public String reservationTel;
+	public String reservationEmail;
+	public String reservationDate;
+	public int cancelFlag;
+	public String createDate;
+	public String modifyDate;
+	public DisplayInfo displayInfo;
 	int totalPrice;
 	
 	public int getReservationInfoId() {

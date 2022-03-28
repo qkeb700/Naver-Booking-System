@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.reservation.dto.ReservationInfo;
+import kr.or.connect.reservation.dto.ReservationInfoPriceDto;
 
 @Repository
 public class ReservationInfoDao {
@@ -23,9 +24,9 @@ public class ReservationInfoDao {
 	
 	public ReservationInfoDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
-		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("Reservation_info").usingGeneratedKeyColumns("id").usingColumns(
+		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("reservation_info").usingGeneratedKeyColumns("id").usingColumns(
 							"product_id", "display_info_id", "reservation_name", "reservation_tel", "reservation_email", "reservation_date",
-							"create_date", "modify_date");
+							"cancel_flag", "create_date", "modify_date");
 	}
 	public List<ReservationInfo> selectByEmail(String reservationEmail) {
 		return jdbc.query(ReservationInfoDaoSql.SELECT_BY_EMAIL, Collections.singletonMap("reservationEmail", reservationEmail), rowMapper);
@@ -69,7 +70,7 @@ public class ReservationInfoDao {
 		params.put("cancelFlag", cancelFlag);
 		return jdbc.update(ReservationInfoDaoSql.SELECT_BY_EMAIL, params);
 	} 
-	public int insert(ReservationInfo reservationInfo) {
+	public int insert(ReservationInfoPriceDto reservationInfo) {
 		Map<String, Object> params = new HashMap<>();
 	    params.put("product_id", reservationInfo.getProductId());
 	    params.put("display_info_id", reservationInfo.getDisplayInfoId());
