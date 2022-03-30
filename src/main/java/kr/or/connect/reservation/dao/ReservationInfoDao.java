@@ -68,7 +68,7 @@ public class ReservationInfoDao {
 		Map<String, Object> params = new HashMap<>();
 		params.put("reservationInfoId", reservationInfoId);
 		params.put("cancelFlag", cancelFlag);
-		return jdbc.update(ReservationInfoDaoSql.SELECT_BY_EMAIL, params);
+		return jdbc.update(ReservationInfoDaoSql.UPDATE_CANCEL_FLAG_BY_ID, params);
 	} 
 	public int insert(ReservationInfoPriceDto reservationInfo) {
 		Map<String, Object> params = new HashMap<>();
