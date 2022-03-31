@@ -78,8 +78,13 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public boolean existReservation(String reservationEmail) {
-		
-		return false;
+		ReservationInfoSetDto reservationInfoSet = new ReservationInfoSetDto();
+		List<ReservationInfo> infoList = reservationInfoDao.selectByEmail(reservationEmail);
+		if(infoList == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }
