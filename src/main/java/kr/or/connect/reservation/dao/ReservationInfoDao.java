@@ -29,7 +29,8 @@ public class ReservationInfoDao {
 							"cancel_flag", "create_date", "modify_date");
 	}
 	public List<ReservationInfo> selectByEmail(String reservationEmail) {
-		return jdbc.query(ReservationInfoDaoSql.SELECT_BY_EMAIL, Collections.singletonMap("reservationEmail", reservationEmail), rowMapper);
+		List<ReservationInfo> infoList = jdbc.query(ReservationInfoDaoSql.SELECT_BY_EMAIL, Collections.singletonMap("reservationEmail", reservationEmail), rowMapper);
+		return infoList.isEmpty()?null:infoList;
 	}
 	
 	public int selectTotalPrice(String reservationEmail, int productId, int displayInfoId) {

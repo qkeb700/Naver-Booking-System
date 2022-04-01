@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <!-- saved from url=(0042)https://m.booking.naver.com/booked/confirm -->
 <html lang="ko" class="no-js" >
@@ -26,6 +27,13 @@
       <meta name="format-detection" content="telephone=no, address=no, email=no">
       <title translate="CM-NBOOKING">네이버 예약</title>
       <link rel="stylesheet" href="./resources/css/bookinglogin.css">
+      <script src="./resources/js/bookinglogin.js" type="text/javascript"></script>
+      <script>
+      	var error = ${noMatchedEmail};
+      	if(error) {
+      		alert("존재하지 않는 이메일 입니다.");
+      	}
+      </script>
    </head>
    <body class="biz  ko" >
       
@@ -41,7 +49,7 @@
                   <h1 class="login_header"> <a href="./mainpage.html"  class="nbooking_logo spr_bi txt_logo" > <span translate="CM-NBOOKING">네이버 예약</span> </a> </h1>
                   <!---->
                   <div >
-                     <form name="confirm_form" class="ng-pristine ng-valid" id="form1" action="bookingLoginOk">
+                     <form name="confirm_form" class="ng-pristine ng-valid" id="form1" action="/reservation/bookinglogin" method="POST">
                         <h2 class="login_header_sub border_bottom"> <span translate="CM-NON_MEMBER_BK_CONFIRMATION">비회원 예약확인</span> </h2>
                         <div class="login_form"> 
                            <label class="label_form" for="resrv_id" translate="CM-BOOKING_NUMBER">예약자 이메일 입력</label> 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.connect.reservation.dao.DisplayInfoDao;
 import kr.or.connect.reservation.dao.ReservationInfoDao;
@@ -44,6 +45,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
+	@Transactional
 	public ReservationInfoPriceDto addReservation(ReservationInfoPriceDto reservationInfoPrice) {
 		ReservationInfoPriceDto reservationInfoPriceDto;
 		int reservationInfoId = reservationInfoDao.insert(reservationInfoPrice);
