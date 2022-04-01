@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.connect.reservation.dto.Category;
@@ -85,11 +86,11 @@ public class NaverBookingApiController {
 	}
 	
 	@GetMapping("/reservations")
-	public ReservationInfoSetDto getReservationInfoSet(@RequestParam(value="reservationEmail", required = true, defaultValue = "") String reservationEmail) {
+	public ReservationInfoSetDto getReservationInfoSet(@RequestParam(name="reservationEmail", required = true, defaultValue = "") String reservationEmail) {
 		return reservationService.getReservationInfoSet(reservationEmail);
 	}
 	@PostMapping("/reservations")
-	public ReservationInfoPriceDto addReservationInfo(@RequestBody(required=true)@Validated ReservationInfoPriceDto reservationInfoPriceDto) {
+	public @ResponseBody ReservationInfoPriceDto addReservationInfo(@RequestBody ReservationInfoPriceDto reservationInfoPriceDto) {
 		return reservationService.addReservation(reservationInfoPriceDto);
 	}
 	@PutMapping("/reservations/{reservationId}")
