@@ -24,4 +24,13 @@ public class ReservationInfoSetDto {
 			this.reservations.addAll(reservations);
 		}
 	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
+	public List<ReservationInfoSetItem> getReservations() {
+		return reservations;
+	}
 }
