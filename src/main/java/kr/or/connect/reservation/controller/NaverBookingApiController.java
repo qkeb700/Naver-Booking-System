@@ -90,7 +90,7 @@ public class NaverBookingApiController {
 		return reservationService.getReservationInfoSet(reservationEmail);
 	}
 	@PostMapping("/reservations")
-	public @ResponseBody ReservationInfoPriceDto addReservationInfo(@RequestBody ReservationInfoPriceDto reservationInfoPriceDto) {
+	public ReservationInfoPriceDto addReservationInfo(@RequestBody ReservationInfoPriceDto reservationInfoPriceDto) {
 		return reservationService.addReservation(reservationInfoPriceDto);
 	}
 	@PutMapping("/reservations/{reservationId}")

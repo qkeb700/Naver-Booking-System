@@ -1,5 +1,9 @@
 package kr.or.connect.reservation.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -7,10 +11,15 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.reservation.dto.ReservationInfo;
@@ -18,10 +27,12 @@ import kr.or.connect.reservation.dto.ReservationInfoPriceDto;
 
 @Repository
 public class ReservationInfoDao {
+	private JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<ReservationInfo> rowMapper = BeanPropertyRowMapper.newInstance(ReservationInfo.class);
 	private SimpleJdbcInsert insertAction;
 	
+	@Autowired
 	public ReservationInfoDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("reservation_info").usingGeneratedKeyColumns("id").usingColumns(
@@ -32,6 +43,7 @@ public class ReservationInfoDao {
 		List<ReservationInfo> infoList = jdbc.query(ReservationInfoDaoSql.SELECT_BY_EMAIL, Collections.singletonMap("reservationEmail", reservationEmail), rowMapper);
 		return infoList.isEmpty()?null:infoList;
 	}
+	
 	
 	public int selectTotalPrice(String reservationEmail, int productId, int displayInfoId) {
 		int totalPrice;
@@ -85,4 +97,31 @@ public class ReservationInfoDao {
 
 	    return insertAction.executeAndReturnKey(params).intValue();
 	}
+	
+//	public int registerReservation(ReservationInfoPriceDto reservationDto) {
+//		KeyHolder keyHolder = new GeneratedKeyHolder();
+//		jdbcTemplate.update(new PreparedStatementCreator() {
+//			
+//			@Override
+//			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+//				PreparedStatement pstmt = con.prepareStatement(
+//						"insert into reservation_info (product_id, display_info_id, reservation_name, reservation_tel, reservation_email, reservation_date, cancel_flag, create_date, modify_date) "
+//								+ "values (?,?,?,?,?,?,?,?,?)",
+//						new String[] { "ID" });
+//				pstmt.setInt(1, reservationDto.getProductId());
+//				pstmt.setInt(2, reservationDto.getDisplayInfoId());
+//				pstmt.setString(3, reservationDto.getReservationName());
+//				pstmt.setString(4, reservationDto.getReservationTel());
+//				pstmt.setString(5, reservationDto.getReservationEmail());
+//				pstmt.setString(6, reservationDto.getReservationDate());
+//				pstmt.setInt(7, reservationDto.getCancelFlag());
+//				pstmt.setTimestamp(8, Timestamp.valueOf(reservationDto.getCreateDate()));
+//				pstmt.setTimestamp(9, Timestamp.valueOf(reservationDto.getModifyDate()));
+//				return pstmt;
+//			}
+//		}, keyHolder);
+//
+//		Number keyValue = keyHolder.getKey();
+//		return keyValue.intValue();
+//	}
 }

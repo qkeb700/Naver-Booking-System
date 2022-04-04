@@ -324,14 +324,14 @@ SubmitSection.prototype = {
 			if(validName && validTel && validEmail) {
 				let requestData = new RequestData();
 				let clientData = requestData.createClientData(displayJson);
-				
+		
 				let oReq = new XMLHttpRequest();
 				oReq.addEventListener("load", function() {
 					alert("예매에 성공하였습니다.");
 					location.href = "/reservation/";
 				});
-				oReq.open("POST", "/reservation/api/reservations", true);
-				oReq.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+				oReq.open("POST", "/reservation/api/reservations");
+				oReq.setRequestHeader('content-type', 'application/json');
 				oReq.send(JSON.stringify(clientData));
 			}
 		})

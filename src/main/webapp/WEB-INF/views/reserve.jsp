@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="inline_form last"> <label class="label" for="message">예매내용</label>
                                     <div class="inline_control">
-                                        <p class="inline_txt selected"><span id="reservationDate">2017.2.17</span>, 총 <span id="totalCount">0</span>매</p>
+                                        <p class="inline_txt selected"><span id="reservationDate">2022-04-04 03:15:16</span>, 총 <span id="totalCount">0</span>매</p>
                                     </div>
                                 </div>
                             </form>
