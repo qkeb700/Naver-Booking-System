@@ -58,48 +58,8 @@ public class ReservationInfoPriceDao {
 		return insert.executeAndReturnKey(params).intValue();
 	}	
 	
-	public int registerPrice(ReservationPrice reservationPrice) {
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		jdbcTemplate.update(new PreparedStatementCreator() {
-			
-			@Override
-			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-				PreparedStatement pstmt = con.prepareStatement(
-						"insert into reservation_info_price(reservation_info_id, product_price_id, count) values (?,?,?)", new String[] {"ID"});
-				
-				pstmt.setInt(1,  reservationPrice.getReservationInfoId());
-				pstmt.setInt(2, reservationPrice.getProductPriceId());
-				pstmt.setInt(3, reservationPrice.getCount());
-				
-				return pstmt;
-			}
-		},keyHolder);
-		
-		Number keyValue = keyHolder.getKey();
-		return keyValue.intValue();
-	}
-	
-//	public List<ReservationPrice> getPriceList(int reservationId) {
-//		List<ReservationPrice> priceList = jdbc.query(ReservationInfoPriceDaoSql.SELECT_PRICES_BY_ID, Collections.singletonMap("reservationId", reservationId), rowMapper); 
-//		return priceList.isEmpty() ? null : priceList; 
-//	}
-	public List<ReservationPrice> getPriceList(int reservationInfoId){
-		List<ReservationPrice> priceList = jdbcTemplate.query(
-				"SELECT id as reservationInfoPriceId, reservation_info_id, product_price_id, count "
-				+ "FROM reservation_info_price "
-				+ "where reservation_info_id=?",
-				new RowMapper<ReservationPrice>() {
-					@Override
-					public ReservationPrice mapRow(ResultSet rs, int rowNum) throws SQLException {
-						ReservationPrice reservationPriceDto = new ReservationPrice();
-						reservationPriceDto.setCount(rs.getInt("count"));
-						reservationPriceDto.setProductPriceId(rs.getInt("product_price_id"));
-						reservationPriceDto.setReservationInfoId(rs.getInt("reservation_info_id"));
-						reservationPriceDto.setReservationInfoPriceId(rs.getInt("reservationInfoPriceId"));
-						return reservationPriceDto;
-					}
-				}, reservationInfoId);
-
-		return priceList.isEmpty() ? null : priceList;
+	public List<ReservationPrice> getPriceList(int reservationId) {
+		List<ReservationPrice> priceList = jdbc.query(ReservationInfoPriceDaoSql.SELECT_PRICES_BY_ID, Collections.singletonMap("reservationId", reservationId), rowMapper); 
+		return priceList.isEmpty() ? null : priceList; 
 	}
 }

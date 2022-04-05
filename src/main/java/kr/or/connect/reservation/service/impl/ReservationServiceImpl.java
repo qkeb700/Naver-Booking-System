@@ -49,16 +49,14 @@ public class ReservationServiceImpl implements ReservationService {
 	public ReservationInfoPriceDto addReservation(ReservationInfoPriceDto reservationInfoPrice) {
 		ReservationInfoPriceDto reservationInfoPriceDto;
 		int reservationInfoId = reservationInfoDao.insert(reservationInfoPrice);
-		System.out.println(reservationInfoId);
 		reservationInfoPrice.setReservationInfoById(reservationInfoId);
 		
 		for(ReservationPrice reservationPrice : reservationInfoPrice.getPrices()) {
 			if(reservationPrice.getCount() > 0) {
-				reservationInfoPriceDao.registerPrice(reservationPrice);
+				reservationInfoPriceDao.insert(reservationPrice);
 			}
 		}
 		reservationInfoPriceDto = getReservationInfoById(reservationInfoId);
-		System.out.println(reservationInfoPriceDto);
 		return reservationInfoPriceDto;
 	}
 	
