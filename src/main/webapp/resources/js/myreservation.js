@@ -17,6 +17,7 @@ PageLoadUnit.prototype = {
 		let oReq = new XMLHttpRequest();
 		oReq.addEventListener("load", function(){
 			let reserveInfo = JSON.parse(oReq.responseText);
+			console.log(reserveInfo);
 		});
 		oReq.open("GET", "/reservation/api/reservations?reservationEmail=" + cookieResult, true);
 		oReq.send();

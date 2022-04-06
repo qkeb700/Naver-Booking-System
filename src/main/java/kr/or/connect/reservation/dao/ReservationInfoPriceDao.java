@@ -35,22 +35,39 @@ public class ReservationInfoPriceDao {
 	private RowMapper<ReservationPrice> rowMapper = BeanPropertyRowMapper.newInstance(ReservationPrice.class);
 	@Autowired
 	public ReservationInfoPriceDao(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+//		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 		this.insert = new SimpleJdbcInsert(dataSource).withTableName("reservation_info_price").usingGeneratedKeyColumns("id");
 	}
 	
+//	public int getTotalPrice(int reservationInfoId) {
+//		List<Integer> totalPrice;
+//		try {
+//			Map<String, Object> params = new HashMap<String, Object>();
+//			params.put("reservationInfoId", reservationInfoId);
+//			totalPrice = jdbc.queryForList(ReservationInfoPriceDaoSql.SELECT_TOTAL_PRICE, Collections.singletonMap("reservationInfoId", reservationInfoId), Integer.class);
+//		} catch(NullPointerException e) {
+//			totalPrice = null;
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//			totalPrice = null;
+//		}
+//		return totalPrice.isEmpty()?null: totalPrice.get(0);
+//	}
 	public int getTotalPrice(int reservationInfoId) {
-		List<Integer> totalPrice;
-		try {
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("reservationInfoId", reservationInfoId);
-			totalPrice = jdbc.queryForList(ReservationInfoPriceDaoSql.SELECT_TOTAL_PRICE, params, Integer.class);
-		} catch(NullPointerException e) {
-			totalPrice = null;
-		} catch(Exception e) {
-			e.printStackTrace();
-			totalPrice = null;
-		}
-		return totalPrice.get(0);
+		List<Integer> totalPrice = jdbcTemplate.query(
+				"select SUM(price*count) as totalPrice from reservation_info " + 
+				"INNER JOIN reservation_info_price ON reservation_info_price.reservation_info_id = reservation_info.id " + 
+				"INNER JOIN product_price ON product_price.id = reservation_info_price.product_price_id " + 
+				"WHERE reservation_info_id = ? ",
+				new RowMapper<Integer>() {
+					@Override
+					public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return rs.getInt("totalPrice");
+					}
+				}, reservationInfoId);
+
+		return totalPrice.isEmpty() ? null : totalPrice.get(0);
 	}
 	
 	public int insert(ReservationPrice reservationInfoPrice) {

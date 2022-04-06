@@ -2,8 +2,10 @@ package kr.or.connect.reservation.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -27,10 +29,10 @@ import kr.or.connect.reservation.dto.ReservationInfoPriceDto;
 
 @Repository
 public class ReservationInfoDao {
-	private JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<ReservationInfo> rowMapper = BeanPropertyRowMapper.newInstance(ReservationInfo.class);
 	private SimpleJdbcInsert insertAction;
+	
 	
 	@Autowired
 	public ReservationInfoDao(DataSource dataSource) {
@@ -98,30 +100,21 @@ public class ReservationInfoDao {
 	    return insertAction.executeAndReturnKey(params).intValue();
 	}
 	
-//	public int registerReservation(ReservationInfoPriceDto reservationDto) {
-//		KeyHolder keyHolder = new GeneratedKeyHolder();
-//		jdbcTemplate.update(new PreparedStatementCreator() {
-//			
-//			@Override
-//			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-//				PreparedStatement pstmt = con.prepareStatement(
-//						"insert into reservation_info (product_id, display_info_id, reservation_name, reservation_tel, reservation_email, reservation_date, cancel_flag, create_date, modify_date) "
-//								+ "values (?,?,?,?,?,?,?,?,?)",
-//						new String[] { "ID" });
-//				pstmt.setInt(1, reservationDto.getProductId());
-//				pstmt.setInt(2, reservationDto.getDisplayInfoId());
-//				pstmt.setString(3, reservationDto.getReservationName());
-//				pstmt.setString(4, reservationDto.getReservationTel());
-//				pstmt.setString(5, reservationDto.getReservationEmail());
-//				pstmt.setString(6, reservationDto.getReservationDate());
-//				pstmt.setInt(7, reservationDto.getCancelFlag());
-//				pstmt.setTimestamp(8, Timestamp.valueOf(reservationDto.getCreateDate()));
-//				pstmt.setTimestamp(9, Timestamp.valueOf(reservationDto.getModifyDate()));
-//				return pstmt;
-//			}
-//		}, keyHolder);
-//
-//		Number keyValue = keyHolder.getKey();
-//		return keyValue.intValue();
-//	}
+	class reservationInfoMapper implements RowMapper<ReservationInfo> {
+		@Override
+		public ReservationInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+			ReservationInfo reservationInfoDto = new ReservationInfo();
+			reservationInfoDto.setCancelFlag(rs.getInt("cancel_flag"));
+			reservationInfoDto.setCreateDate(rs.getTimestamp("create_date").toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			reservationInfoDto.setDisplayInfoId(rs.getInt("displayInfoId"));
+			reservationInfoDto.setProductId(rs.getInt("productId"));
+			reservationInfoDto.setReservationDate(rs.getTimestamp("reservation_date").toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+			reservationInfoDto.setReservationInfoId(rs.getInt("reservationInfoId"));
+			reservationInfoDto.setReservationName(rs.getString("reservation_name"));
+			reservationInfoDto.setReservationTel(rs.getString("reservation_tel"));
+			reservationInfoDto.setReservationEmail(rs.getString("reservation_email"));
+			reservationInfoDto.setModifyDate(rs.getTimestamp("modify_date").toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			return reservationInfoDto;
+		}
+	}
 }
