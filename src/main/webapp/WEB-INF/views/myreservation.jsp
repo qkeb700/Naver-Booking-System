@@ -13,7 +13,7 @@
 <title>네이버 예약</title>
 
 <link href="./resources/css/style.css" rel="stylesheet">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
 <script src="./resources/js/myreservation.js" type="text/javascript"></script>
 </head>
 

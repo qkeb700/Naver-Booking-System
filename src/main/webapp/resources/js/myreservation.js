@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){
 	let pageLoadUnit = new PageLoadUnit();
 	pageLoadUnit.updateReserve();
+	//pageLoadUnit.getReservation(reserveInfo);
 });
 
 function PageLoadUnit() {}
@@ -13,22 +14,20 @@ PageLoadUnit.prototype = {
 			let chunk = cookie[i];
 			if(chunk.indexOf(name)==0) cookieResult = chunk.substring(name.length, chunk.length);
 		}
-		console.log(cookieResult);
 		let oReq = new XMLHttpRequest();
 		oReq.addEventListener("load", function(){
 			let reserveInfo = JSON.parse(oReq.responseText);
 			console.log(reserveInfo);
+			this.getReservation(reserveInfo);
 		});
 		oReq.open("GET", "/reservation/api/reservations?reservationEmail=" + cookieResult, true);
+		console.log(cookieResult);
 		oReq.send();
-	}
-}
-
-function ReserveIOUnit() {
+	},
 	
-}
-ReserveIOUnit.prototype = {
-	insertConfirmedReservation : function() {
-		
+	// 예약정보 출력
+	getReservation : function(reserveInfo) {
+		let template = document.querySelector("#reservationArticle").innerHTML;
+		let bindTemplate = Handlebars.compile(template);
 	}
 }
