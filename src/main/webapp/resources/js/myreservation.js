@@ -21,6 +21,9 @@ PageLoadUnit.prototype = {
 			let getReservation = new GetReservation();
 
 			getReservation.getReservations(reserveInfo);
+			getReservation.getCountItems();
+			getReservation.hideSection();
+			getReservation.registerEvents();
 		});
 		oReq.open("GET", "/reservation/api/reservations?reservationEmail=" + email, true);
 		oReq.send();
@@ -66,6 +69,42 @@ GetReservation.prototype = {
 		} else {
 			return ["<div class='booking_cancel'> <button class='btn'> <span>예매자 리뷰 남기기</span> </button> </div>", "li.card.used"];
 		}
+	},
+	
+	getCountItems : function() {
+		// 전체 개수
+		document.querySelector("ul.summary_board > li:nth-child(1) > a > span").innerText = document.querySelectorAll("article").length;
+		// 이용 예정
+		document.querySelector("ul.summary_board > li:nth-child(2) > a > span").innerText = document.querySelectorAll("li.card.confirmed > article").length;
+		// 이용 완료
+		document.querySelector("ul.summary_board > li:nth-child(3) > a > span").innerText = document.querySelectorAll("li.card.used > article").length;
+		// 취소 환불
+		document.querySelector("ul.summary_board > li:nth-child(4) > a > span").innerText = document.querySelectorAll("li.card.used.cancle > article").length;
+	},
+	
+	hideSection : function() {
+		if (document.querySelector("#container > div.ct > div > div.my_summary > ul > li:nth-child(2) > a > span").innerText == 0) document.querySelector("#container > div.ct > div > div.wrap_mylist > ul > li.card.confirmed").style.display = "none";
+		// 이용완료
+		if (document.querySelector("#container > div.ct > div > div.my_summary > ul > li:nth-child(3) > a > span").innerText == 0) document.querySelector("#container > div.ct > div > div.wrap_mylist > ul > li:nth-child(2)").style.display = "none";
+		// 취소된 예약
+		if (document.querySelector("#container > div.ct > div > div.my_summary > ul > li:nth-child(4) > a > span").innerText == 0) document.querySelector("#container > div.ct > div > div.wrap_mylist > ul > li.card.used.cancel").style.display = "none";
+	},
+	
+	registerEvents : function() {
+		// 취소버튼 이벤트 등록
+		document.querySelector("li.card.confirmed div.booking_cancel>button.btn").forEach(function(obj) {
+			obj.addEventListener("click", function() {
+				let popupLayer = document.querySelector("div.popup_booking_wrapper");
+				let title = obj.parentElement.parentElement.querySelector("h4").innerText;
+				let reserveDate = obj.parentElement.parentElement.querySelector("ul>li:nth-child(1)>em").innerText;
+				let reservationInfoId=obj.parentElement.parentElement.querySelector("em.booking_number").innerText.substr(3);
+				
+				popupLayer.querySelector("h1>input").value = reservationInfoId;
+				popupLayer.querySelector("h1>span").innerText = title;
+				popupLayer.querySelector("h1>small").innerText = "예약일: " + reserveDate;
+				popupLayer.style.display = "block";
+			});
+		});		
 	}
 	
 }	
