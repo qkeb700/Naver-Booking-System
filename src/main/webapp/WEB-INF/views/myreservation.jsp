@@ -71,7 +71,7 @@
 				<div class="wrap_mylist">
 					<ul class="list_cards" ng-if="bookedLists.length > 0">
 						<!--[D] 예약확정: .confirmed, 취소된 예약&이용완료: .used 추가 card -->
-						<li class="card" style="display: none;"></li>
+						<!--<li class="card" style="display: none;"></li>-->
 						<li class="card confirmed">
 							<div class="link_booking_details">
 								<div class="card_header">
@@ -180,7 +180,7 @@
 			<div class="left"></div>
 			<div class="middle">
 				<div class="card_detail">
-					<em class="booking_number">{{reservationInfoId}}</em>
+					<em class="booking_number">No.{{reservationInfoId}}</em>
 					<h4 class="tit">{{productDescription}}</h4>
 					<ul class="detail">
 						<li class="item"><span class="item_tit">일정</span> <em

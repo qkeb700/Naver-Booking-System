@@ -74,15 +74,16 @@ GetReservation.prototype = {
 	getCountItems : function() {
 		// 전체 개수
 		document.querySelector("ul.summary_board > li:nth-child(1) > a > span").innerText = document.querySelectorAll("article").length;
-		// 이용 예정
-		document.querySelector("ul.summary_board > li:nth-child(2) > a > span").innerText = document.querySelectorAll("li.card.confirmed > article").length;
-		// 이용 완료
-		document.querySelector("ul.summary_board > li:nth-child(3) > a > span").innerText = document.querySelectorAll("li.card.used > article").length;
-		// 취소 환불
-		document.querySelector("ul.summary_board > li:nth-child(4) > a > span").innerText = document.querySelectorAll("li.card.used.cancle > article").length;
+		// 예약확정
+		document.querySelector("ul.summary_board > li:nth-child(2) > a > span").innerText = document.querySelectorAll("div.wrap_mylist > ul > li.card.confirmed > article").length;
+		// 이용완료
+		document.querySelector("ul.summary_board > li:nth-child(3) > a > span").innerText = document.querySelectorAll("div.wrap_mylist > ul > li:nth-child(2) > article").length;
+		// 취소된 예약
+		document.querySelector("ul.summary_board > li:nth-child(4) > a > span").innerText = document.querySelectorAll("div.wrap_mylist > ul > li.card.used.cancel > article").length;
 	},
 	
 	hideSection : function() {
+		// 이용 예정
 		if (document.querySelector("#container > div.ct > div > div.my_summary > ul > li:nth-child(2) > a > span").innerText == 0) document.querySelector("#container > div.ct > div > div.wrap_mylist > ul > li.card.confirmed").style.display = "none";
 		// 이용완료
 		if (document.querySelector("#container > div.ct > div > div.my_summary > ul > li:nth-child(3) > a > span").innerText == 0) document.querySelector("#container > div.ct > div > div.wrap_mylist > ul > li:nth-child(2)").style.display = "none";
@@ -92,7 +93,7 @@ GetReservation.prototype = {
 	
 	registerEvents : function() {
 		// 취소버튼 이벤트 등록
-		document.querySelector("li.card.confirmed div.booking_cancel>button.btn").forEach(function(obj) {
+		document.querySelectorAll("li.card.confirmed div.booking_cancel>button.btn").forEach(function(obj) {
 			obj.addEventListener("click", function() {
 				let popupLayer = document.querySelector("div.popup_booking_wrapper");
 				let title = obj.parentElement.parentElement.querySelector("h4").innerText;
