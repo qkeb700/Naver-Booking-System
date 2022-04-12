@@ -24,6 +24,7 @@ PageLoadUnit.prototype = {
 			getReservation.getCountItems();
 			getReservation.hideSection();
 			getReservation.registerEvents();
+			getReservation.registerPopupEvents();
 		});
 		oReq.open("GET", "/reservation/api/reservations?reservationEmail=" + email, true);
 		oReq.send();
@@ -106,6 +107,21 @@ GetReservation.prototype = {
 				popupLayer.style.display = "block";
 			});
 		});		
+		// 리뷰남기기 버튼 이벤트 등록
+		document.querySelectorAll(".wrap_mylist>ul.list_cards>li:nth-child(2) div.booking_cancel>button.btn").forEach(function(obj){
+			obj.addEventListener("click", function(){
+				let reservationInfoId = obj.closest("div.card_detail").firstElementChild.innerHTML.substring(3);
+				let productId = obj.closest("div.card_body").firstElementChild.value;
+				location.href='reviewWrite?reservationInfoId=' + reservationInfoId + '&productId=' + productId;
+			});
+		})
+	},
+	
+	registerPopupEvents : function() {
+		let popupLayer = document.querySelector(".popup_booking_wrapper");
+		// close 버튼
+		document.querySelector(".popup_btn_close").addEventListener("click", ()=>{popupLayer.style.display='none';});
+		console.log("표시되나")
 	}
 	
 }	

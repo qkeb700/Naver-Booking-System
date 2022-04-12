@@ -123,7 +123,13 @@ TicketSelect.prototype = {
 				let currentCount = showQtyInput.getAttribute("value");
 				let totalPrice = evt.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.childNodes[0];
 				let totalValue = totalPrice.innerHTML;
+				let rawPrice = evt.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[1].innerHTML;
 				let price = parseInt(evt.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[1].innerHTML)*1000;
+				
+				rawPrice = rawPrice.split(' ');
+				let newPrice = rawPrice[0];
+				newPrice = newPrice.split(',');
+				let sumPrice = newPrice[0] + newPrice[1];
 				if(currentCount > 0) {
 					evt.target.classList.remove("disabled");
 				}
@@ -137,7 +143,7 @@ TicketSelect.prototype = {
 				showQtyInput.setAttribute("value", changedQty);
 				console.log(currentCount);
 				if(showQtyInput.getAttribute("value") > 0) {
-					totalPrice.innerHTML =  totalValue - price;
+					totalPrice.innerHTML =  totalValue - sumPrice;
 					totalPrice.classList.add("on_color");					
 				} else {
 					totalPrice.innerHTML =  0;
@@ -152,7 +158,13 @@ TicketSelect.prototype = {
 				let plusBtn = evt.target.parentElement.childNodes[3];
 				let minusBtn = evt.target.parentElement.childNodes[1];
 				let totalPrice = evt.target.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.childNodes[0];
-				let price = parseInt(evt.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[1].innerHTML)*1000;
+				let rawPrice = evt.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[1].innerHTML;
+				let price = parseInt(evt.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[3].childNodes[1].innerHTML);
+
+				rawPrice = rawPrice.split(' ');
+				let newPrice = rawPrice[0];
+				newPrice = newPrice.split(',');
+				let sumPrice = newPrice[0] + newPrice[1];
 				// 현재 수량의 수
 				let currentCount = showQtyInput.getAttribute("value");
 				// 더하기 버튼 눌러서 하나 추가된 수
@@ -164,7 +176,7 @@ TicketSelect.prototype = {
 				}
 				// 수량 개수 박스에 하나 수량 추가되어진 개수 나타내기
 				showQtyInput.setAttribute("value", changedQty);
-				totalPrice.innerHTML = showQtyInput.getAttribute("value") * price;
+				totalPrice.innerHTML = showQtyInput.getAttribute("value") * sumPrice;
 			}
 			// 총 티켓 매수 변경하기
 			let totalCount = document.querySelector("#totalCount");
