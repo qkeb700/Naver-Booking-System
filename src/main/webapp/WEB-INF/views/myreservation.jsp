@@ -219,7 +219,7 @@
 			<div class="left"></div>
 			<div class="middle">
 				<!--[D] 예약 신청중: .ico_clock, 예약확정&이용완료: .ico_check2, 취소된 예약: .ico_cancel 추가 spr_book2 -->
-				<i class="spr_book2 ico_clock"></i> <span class="tit">예약 신청중</span>
+				<i class="spr_book2 {{icon}}"></i> <span class="tit">{{description}}</span>
 			</div>
 			<div class="right"></div>
 		</div>

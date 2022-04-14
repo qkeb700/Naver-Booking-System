@@ -132,12 +132,35 @@ GetReservation.prototype = {
 		let oReq = new XMLHttpRequest();
 		oReq.addEventListener("load", function(){
 			let pageLoadUnit = new PageLoadUnit();
-			//this.initScreen();
+			//let getReservation = new GetReservation();
+			this.initScreen();
 			pageLoadUnit.updateReserve(this.reservationEmail);
 			document.querySelector(".popup_booking_wrapper").style.display = 'none';
-		})
+		}.bind(this));
 		oReq.open("put", "/reservation/api/reservations/" + reservationInfoId);
 		oReq.send();
+	},
+	
+	// 예약 취소 후, 화면 초기화
+	initScreen : function() {
+		let template = document.querySelector("#cardDescription").innerHTML;
+		let bindTemplate = Handlebars.compile(template);
+		
+		let details = {
+				confirmed : ['#container > div.ct > div > div.wrap_mylist > ul > li.card.confirmed', 'ico_check2', '예약 확정'],
+				used : ['#container > div.ct > div > div.wrap_mylist > ul > li:nth-child(2)', 'ico_check2', '이용 완료'],
+				canceled : ['#container > div.ct > div > div.wrap_mylist > ul > li.card.used.cancel', 'ico_cancel', '취소된 예약']
+		}
+		
+		for(let key in details) {
+			document.querySelector(details[key][0]).innerHTML = '';
+			let data = {
+				icon : details[key][1],
+				description : details[key][2]
+			}
+			let resultHTML = bindTemplate(data);
+			document.querySelector(details[key][0]).innerHTML = resultHTML;
+		}
 	}
 	
 	
