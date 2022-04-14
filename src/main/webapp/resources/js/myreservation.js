@@ -121,8 +121,25 @@ GetReservation.prototype = {
 		let popupLayer = document.querySelector(".popup_booking_wrapper");
 		// close 버튼
 		document.querySelector(".popup_btn_close").addEventListener("click", ()=>{popupLayer.style.display='none';});
-		console.log("표시되나")
+		// 아니오 버튼
+		document.querySelector(".btn_gray>.btn_bottom").addEventListener("click", ()=>{popupLayer.style.display='none'});
+		// 예 버튼
+		document.querySelector(".btn_green>.btn_bottom").addEventListener("click", ()=>{this.cancelReservation(document.querySelector("#popupId").value)});
+	},
+	
+	// 예약 취소하기
+	cancelReservation : function(reservationInfoId) {
+		let oReq = new XMLHttpRequest();
+		oReq.addEventListener("load", function(){
+			let pageLoadUnit = new PageLoadUnit();
+			//this.initScreen();
+			pageLoadUnit.updateReserve(this.reservationEmail);
+			document.querySelector(".popup_booking_wrapper").style.display = 'none';
+		})
+		oReq.open("put", "/reservation/api/reservations/" + reservationInfoId);
+		oReq.send();
 	}
+	
 	
 }	
 	
