@@ -10,6 +10,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
 	<title>네이버 예약</title>
 	<link href="./resources/css/style.css" rel="stylesheet">
+	<script src="./resources/js/reviewWrite.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -53,6 +54,7 @@
 				<!-- //리뷰 별점 -->
 
 				<!-- 리뷰 입력 -->
+				<form action="reservations/${reservationInfoId }/comments" method="POST" id="form" enctype="multipart/form-data">
 				<div class="review_contents write">
 					<!-- [D] review_write_info 클릭 시 자신을 숨기고 review_textarea 에 focus를 보낸다. -->
 					<a href="#" class="review_write_info">
@@ -99,6 +101,7 @@
 					<!-- //리뷰 포토 -->
 
 				</div>
+				</form>
 				<!-- //리뷰 작성 푸터 -->
 
 				<!-- 리뷰 등록 -->

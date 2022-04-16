@@ -1,7 +1,11 @@
 package kr.or.connect.reservation.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.connect.reservation.dto.Category;
 import kr.or.connect.reservation.dto.Product;
@@ -97,5 +102,14 @@ public class NaverBookingApiController {
 	public ReservationInfoPriceDto deleteReservationInfo(@PathVariable int reservationId) {
 		return reservationService.changeCancelFlagById(reservationId);
 	}
-	
+	@PostMapping("/reservations/{reservationInfoId}/comments")
+	public String writeComment(@PathVariable(name="reservationInfoId") int reservationInfoId,
+			@RequestParam(name = "attachedImage") MultipartFile attachedImage,
+		      @RequestParam(name = "comment", required = true) String comment,
+		      @RequestParam(name = "productId", required = true) String productId,
+		      @RequestParam(name = "score", required = true) int score, HttpServletResponse response,
+		      HttpSession session) throws IOException {
+		
+		return null;
+	}
 }
