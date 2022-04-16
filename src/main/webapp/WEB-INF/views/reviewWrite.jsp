@@ -55,6 +55,8 @@
 
 				<!-- 리뷰 입력 -->
 				<form action="reservations/${reservationInfoId }/comments" method="POST" id="form" enctype="multipart/form-data">
+				<input type="hidden" name="productId" value=${productId } id="productId" />
+				<input type="hidden" name="score" id="score" />
 				<div class="review_contents write">
 					<!-- [D] review_write_info 클릭 시 자신을 숨기고 review_textarea 에 focus를 보낸다. -->
 					<a href="#" class="review_write_info">
@@ -66,7 +68,7 @@
 						</span>
 						<span class="left_space">(단, 리뷰 포인트는 ID 당 1일 최대 5건까지 지급됩니다.)</span>
 					</a>
-					<textarea cols="30" rows="10" class="review_textarea"></textarea>
+					<textarea cols="30" rows="10" class="review_textarea" name="comment"></textarea>
 				</div>
 				<!-- //리뷰 입력 -->
 
@@ -77,7 +79,7 @@
 							<i class="fn fn-image1" aria-hidden="true"></i>
 							<span class="text_add_photo">사진 추가</span>
 						</label>
-						<input type="file" class="hidden_input" id="reviewImageFileOpenInput" accept="image/*" multiple>
+						<input type="file" class="hidden_input" id="reviewImageFileOpenInput" name="attachedImage" accept="image/*" multiple>
 						<div class="guide_review">
 							<span>0</span>/400
 							<span>(최소5자이상)</span>

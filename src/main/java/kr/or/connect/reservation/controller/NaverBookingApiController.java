@@ -110,6 +110,7 @@ public class NaverBookingApiController {
 		      @RequestParam(name = "score", required = true) int score, HttpServletResponse response,
 		      HttpSession session) throws IOException {
 		
+		String email = (String) session.getAttribute("loginInfo");
 		return null;
 	}
 }
