@@ -18,4 +18,5 @@ public interface ReservationService {
 	public ReservationInfoPriceDto changeCancelFlagById(int reservationId);
 	public ReservationInfoPriceDto getReservationInfoById(int reservationId);
 	public boolean existReservation(String reservationEmail);
+	public int writeReview(int reservationInfoId, String filePath, String comment, String productId, int score);
 }
