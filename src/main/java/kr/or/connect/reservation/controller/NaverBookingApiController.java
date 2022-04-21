@@ -1,6 +1,10 @@
 package kr.or.connect.reservation.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -111,6 +115,17 @@ public class NaverBookingApiController {
 		      HttpSession session) throws IOException {
 		
 		String email = (String) session.getAttribute("loginInfo");
+		String currentTime = new SimpleDateFormat("yyyyMMddkkmmss").format(new Date());
+		String filePath = "";
+		
+		if(attachedImage.getContentType().startsWith("image")) {
+			File folder = new File("c:/tmp_upload");
+			if(!folder.exists()) {
+				folder.mkdir();
+			}
+			filePath = (folder.getPath() + "/" + currentTime + "_" + attachedImage.getOriginalFilename()).toLowerCase();
+			
+		}
 		return null;
 	}
 }

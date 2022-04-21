@@ -1,5 +1,7 @@
 package kr.or.connect.reservation.service.impl;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.connect.reservation.dao.DisplayInfoDao;
 import kr.or.connect.reservation.dao.ReservationInfoDao;
 import kr.or.connect.reservation.dao.ReservationInfoPriceDao;
+import kr.or.connect.reservation.dao.ReservationUserCommentDao;
 import kr.or.connect.reservation.dto.DisplayInfo;
 import kr.or.connect.reservation.dto.ReservationInfo;
 import kr.or.connect.reservation.dto.ReservationInfoPriceDto;
 import kr.or.connect.reservation.dto.ReservationInfoSetDto;
 import kr.or.connect.reservation.dto.ReservationInfoSetItem;
 import kr.or.connect.reservation.dto.ReservationPrice;
+import kr.or.connect.reservation.dto.ReservationUserComment;
 import kr.or.connect.reservation.service.ReservationService;
 
 @Service
@@ -25,6 +29,9 @@ public class ReservationServiceImpl implements ReservationService {
 	private ReservationInfoPriceDao reservationInfoPriceDao;
 	@Autowired
 	private DisplayInfoDao displayInfoDao;
+	@Autowired
+	private ReservationUserCommentDao reservationUserCommentDao;
+	
 	@Override
 	public ReservationInfoSetDto getReservationInfoSet(String reservationEmail) {
 		ReservationInfoSetDto reservationInfoSet = new ReservationInfoSetDto();
@@ -89,6 +96,26 @@ public class ReservationServiceImpl implements ReservationService {
 		} else {
 			return true;
 		}
+	}
+
+	@Override
+	@Transactional
+	public int writeReview(int reservationInfoId, String filePath, String comment, String productId, int score) {
+		 LocalDateTime localDateTime = LocalDateTime.now();
+		 String currentTime = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		 
+		 ReservationUserComment reservationComment = new ReservationUserComment();
+		 reservationComment.setReservationInfoId(reservationInfoId);
+		 reservationComment.setComment(comment);
+		 reservationComment.setProductId(Integer.parseInt(productId));
+		 reservationComment.setScore(score);
+		 reservationComment.setCreateDate(currentTime);
+		 reservationComment.setModifyDate(currentTime);
+		 int reservationUserCommentId = reservationUserCommentDao.insert(reservationComment);
+		 
+		 if(filePath == null || filePath.equals("")) {
+			 return reservationUserCommentId;
+		 }
 	}
 
 }
