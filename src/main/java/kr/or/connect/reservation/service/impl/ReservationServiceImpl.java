@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.connect.reservation.dao.DisplayInfoDao;
+import kr.or.connect.reservation.dao.FileInfoDao;
 import kr.or.connect.reservation.dao.ReservationInfoDao;
 import kr.or.connect.reservation.dao.ReservationInfoPriceDao;
 import kr.or.connect.reservation.dao.ReservationUserCommentDao;
@@ -35,6 +36,8 @@ public class ReservationServiceImpl implements ReservationService {
 	private ReservationUserCommentDao reservationUserCommentDao;
 	@Autowired
 	private ReservationUserCommentImageDao reservationUserCommentImageDao;
+	@Autowired
+	private FileInfoDao fileInfoDao;
 	
 	@Override
 	public ReservationInfoSetDto getReservationInfoSet(String reservationEmail) {
@@ -122,7 +125,15 @@ public class ReservationServiceImpl implements ReservationService {
 		 }
 		 
 		 FileInfo fileInfo = new FileInfo();
-		 fileInfo.setFileName(filePath);
+		 fileInfo.setFileName(filePath.substring(filePath.lastIndexOf("/") + 1));
+		 fileInfo.setSaveFileName(filePath.substring(filePath.indexOf("\\") + 1));
+		 fileInfo.setContentType("image/" + filePath.substring(filePath.lastIndexOf(".") + 1));
+		 fileInfo.setDeleteFlag(0);
+		 fileInfo.setCreateDate(currentTime);
+		 fileInfo.setModifyDate(currentTime);
+		 int fileInfoId = fileInfoDao.insert(fileInfo);
+		 
+		 return reservationUserCommentId;
 	}
 
 }
