@@ -12,7 +12,9 @@ import kr.or.connect.reservation.dao.DisplayInfoDao;
 import kr.or.connect.reservation.dao.ReservationInfoDao;
 import kr.or.connect.reservation.dao.ReservationInfoPriceDao;
 import kr.or.connect.reservation.dao.ReservationUserCommentDao;
+import kr.or.connect.reservation.dao.ReservationUserCommentImageDao;
 import kr.or.connect.reservation.dto.DisplayInfo;
+import kr.or.connect.reservation.dto.FileInfo;
 import kr.or.connect.reservation.dto.ReservationInfo;
 import kr.or.connect.reservation.dto.ReservationInfoPriceDto;
 import kr.or.connect.reservation.dto.ReservationInfoSetDto;
@@ -31,6 +33,8 @@ public class ReservationServiceImpl implements ReservationService {
 	private DisplayInfoDao displayInfoDao;
 	@Autowired
 	private ReservationUserCommentDao reservationUserCommentDao;
+	@Autowired
+	private ReservationUserCommentImageDao reservationUserCommentImageDao;
 	
 	@Override
 	public ReservationInfoSetDto getReservationInfoSet(String reservationEmail) {
@@ -116,6 +120,9 @@ public class ReservationServiceImpl implements ReservationService {
 		 if(filePath == null || filePath.equals("")) {
 			 return reservationUserCommentId;
 		 }
+		 
+		 FileInfo fileInfo = new FileInfo();
+		 fileInfo.setFileName(filePath);
 	}
 
 }

@@ -1,7 +1,9 @@
 package kr.or.connect.reservation.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -125,7 +127,22 @@ public class NaverBookingApiController {
 			}
 			filePath = (folder.getPath() + "/" + currentTime + "_" + attachedImage.getOriginalFilename()).toLowerCase();
 			
+			try (FileOutputStream fos = new FileOutputStream(filePath);
+					InputStream is = attachedImage.getInputStream(); ){
+				
+				int readCount = 0;
+				byte[] buffer = new byte[1024];
+				while((readCount = is.read(buffer)) != -1) {
+					fos.write(buffer, 0, readCount);
+				}
+				
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+			
 		}
+		reservationService.writeReview(reservationInfoId, filePath, comment, productId, score);
+		response.sendRedirect("../../myreservation?reservationEmail=" + email);
 		return null;
 	}
 }
