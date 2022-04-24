@@ -22,6 +22,7 @@ import kr.or.connect.reservation.dto.ReservationInfoSetDto;
 import kr.or.connect.reservation.dto.ReservationInfoSetItem;
 import kr.or.connect.reservation.dto.ReservationPrice;
 import kr.or.connect.reservation.dto.ReservationUserComment;
+import kr.or.connect.reservation.dto.ReservationUserCommentImage;
 import kr.or.connect.reservation.service.ReservationService;
 
 @Service
@@ -132,6 +133,12 @@ public class ReservationServiceImpl implements ReservationService {
 		 fileInfo.setCreateDate(currentTime);
 		 fileInfo.setModifyDate(currentTime);
 		 int fileInfoId = fileInfoDao.insert(fileInfo);
+		 
+		 ReservationUserCommentImage reservationUserCommentImage = new ReservationUserCommentImage();
+		 reservationUserCommentImage.setFileId(fileInfoId);
+		 reservationUserCommentImage.setReservationInfoId(reservationInfoId);
+		 reservationUserCommentImage.setReservationUserCommentId(reservationUserCommentId);
+		 reservationUserCommentImageDao.insert(reservationUserCommentImage);
 		 
 		 return reservationUserCommentId;
 	}
