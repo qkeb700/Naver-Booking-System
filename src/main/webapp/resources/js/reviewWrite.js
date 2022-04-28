@@ -17,6 +17,14 @@ GetReviewWritePage.prototype = {
 			}.bind(this));
 		}.bind(this));
 		
-		
+		// 글자수 입력 및 제한
+		document.querySelector("textarea").addEventListener("keyup", function(){
+			let reviewTextLength = document.querySelector(".guide_review").firstElementChild.innerText;
+			if(reviewTextLength > 400) {
+				alert("400자 제한입니다.");
+				document.querySelector("textarea").value = document.querySelector("textarea").value.substring(0, 400);
+			}
+			document.querySelector("guide_review").firstElementChild.innerText = document.querySelector("textarea").value.length;
+		});
 	}
 }
