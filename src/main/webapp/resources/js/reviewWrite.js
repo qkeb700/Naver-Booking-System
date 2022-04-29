@@ -26,5 +26,16 @@ GetReviewWritePage.prototype = {
 			}
 			document.querySelector("guide_review").firstElementChild.innerText = document.querySelector("textarea").value.length;
 		});
+		
+		// 리뷰 등록 버튼 활성화
+		document.querySelector("textarea").addEventListener("blur", function(){
+			let reviewTextLength = document.querySelector(".guide_review").firstElementChild.innerText;
+			if(reviewTextLength >= 5 && reviewTextLength <= 400) {
+				document.querySelector("button.bk_btn").style.background = "#d1d1d1";
+				document.querySelector("button.bk_btn").style.cursor = "pointer";
+			} else {
+				
+			}
+		})
 	}
 }
