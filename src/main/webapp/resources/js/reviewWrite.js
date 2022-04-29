@@ -34,8 +34,9 @@ GetReviewWritePage.prototype = {
 				document.querySelector("button.bk_btn").style.background = "#d1d1d1";
 				document.querySelector("button.bk_btn").style.cursor = "pointer";
 			} else {
-				
+				document.querySelector("button.bk_btn").style.background = "#d1d1d1";
+				document.querySelector("button.bk_btn").style.cursor = "default";
 			}
-		})
+		});
 	}
 }
