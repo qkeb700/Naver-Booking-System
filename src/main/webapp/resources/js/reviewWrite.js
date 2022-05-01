@@ -38,5 +38,15 @@ GetReviewWritePage.prototype = {
 				document.querySelector("button.bk_btn").style.cursor = "default";
 			}
 		});
+		
+		//  form 제출
+		document.querySelector("button.bk_btn").addEventListener("click", function(){
+			document.querySelector("#score").value = document.querySelector(".star_rank.gray_star").innerText;
+			let reviewTextLength = document.querySelector(".guide_review").firstElementChild.innerText;
+			if(reviewTextLength >= 5 && reviewTextLength <= 400) {
+				let form = document.querySelector("#form");
+				form.submit();
+			}
+		})
 	}
 }
