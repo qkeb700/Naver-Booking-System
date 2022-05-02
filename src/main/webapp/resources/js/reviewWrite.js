@@ -47,6 +47,12 @@ GetReviewWritePage.prototype = {
 				let form = document.querySelector("#form");
 				form.submit();
 			}
+		});
+		
+		// 파일 첨부 및 제한
+		document.querySelector("#reviewImageFileOpenInput").addEventListener("change", function(evt){
+			let image = evt.target.files[0];
+			console.log(image);
 		})
 	}
 }
