@@ -52,7 +52,12 @@ GetReviewWritePage.prototype = {
 		// 파일 첨부 및 제한
 		document.querySelector("#reviewImageFileOpenInput").addEventListener("change", function(evt){
 			let image = evt.target.files[0];
-			console.log(image);
+			let filenameExtension = image.name.substr(image.name.lastIndexOf(".")+1).toLowerCase();
+			
+			if(['jpg', 'png'].indexOf(filenameExtension) <= -1) {
+				alert("첨부 파일 확장자는 jpg 또는 png만 가능합니다.");
+				return;
+			}
 		})
 	}
 }
