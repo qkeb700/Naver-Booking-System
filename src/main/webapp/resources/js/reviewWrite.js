@@ -58,6 +58,11 @@ GetReviewWritePage.prototype = {
 				alert("첨부 파일 확장자는 jpg 또는 png만 가능합니다.");
 				return;
 			}
+			// 10MB 제한
+			if(image.size > 1024 * 1024 * 10) {
+				alert("첨부 파일 크기는 10MB 제한입니다.");
+				return;
+			}
 		})
 	}
 }
