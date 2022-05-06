@@ -63,6 +63,8 @@ GetReviewWritePage.prototype = {
 				alert("첨부 파일 크기는 10MB 제한입니다.");
 				return;
 			}
+			document.querySelector("img.item_thumb").closest("li").style.display='inline-block';
+			document.querySelector("img.item_thumb").src = window.URL.createObjectURL(image);
 		})
 	}
 }
