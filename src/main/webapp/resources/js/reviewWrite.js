@@ -65,6 +65,13 @@ GetReviewWritePage.prototype = {
 			}
 			document.querySelector("img.item_thumb").closest("li").style.display='inline-block';
 			document.querySelector("img.item_thumb").src = window.URL.createObjectURL(image);
-		})
+		});
+		
+		// 첨부 파일 제거
+		document.querySelector("ul.lst_thumb a.anchor").addEventListener("click", function(evt) {
+			document.querySelector("#reviewImageFileOpenInput").value='';
+			document.querySelector("#reviewImageFileOpenInput").src='';
+			evt.target.closest("li").style.display = 'none';
+		});
 	}
 }
