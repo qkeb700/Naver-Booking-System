@@ -11,6 +11,7 @@ GetReviewWritePage.prototype = {
 	registerEvents : function() {
 		this.stars.forEach(function(v){
 			v.addEventListener("click", function(evt){
+				this.paintStars(evt.target.value);
 				document.querySelector(".gray_star").style.color = 'black';
 				document.querySelector(".gray_star").innerText = evt.target.value;
 				document.querySelector(".review_write_info").style.display = 'none';				
@@ -73,5 +74,13 @@ GetReviewWritePage.prototype = {
 			document.querySelector("#reviewImageFileOpenInput").src='';
 			evt.target.closest("li").style.display = 'none';
 		});
+		
+		// 별점 색칠
+		paintStars : function(val) {
+			this.stars.forEach((v)=>{v.checked=false});
+			for(let i = 0; i < val; i++) {
+				this.stars[i].checked = true;
+			}
+		}
 	}
 }
