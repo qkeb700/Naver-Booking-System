@@ -75,12 +75,12 @@ GetReviewWritePage.prototype = {
 			evt.target.closest("li").style.display = 'none';
 		});
 		
-		// 별점 색칠
-		paintStars : function(val) {
-			this.stars.forEach((v)=>{v.checked=false});
-			for(let i = 0; i < val; i++) {
-				this.stars[i].checked = true;
-			}
+	},
+	// 별점 색칠
+	paintStars : function(val) {
+		this.stars.forEach((v)=>{v.checked=false});
+		for(let i = 0; i < val; i++) {
+			this.stars[i].checked = true;
 		}
 	}
 }
